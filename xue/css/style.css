@@ -1,0 +1,87 @@
+:root{
+  --paper:#f5f0e6; --card:#fbf8f1; --sunk:#ece5d6; --ink:#2b2620; --ink-2:#6b6157; --ink-3:#72675a; --rule:#ddd3c1;
+  --zhu:#a8392b; --indigo:#2f4a6b; --gold:#8a6a2f; --ok:#2f6b4a; --bad:#a8392b;
+  --f-zh:"LXGW WenKai TC","Songti TC","Noto Serif TC",serif;
+  --f-la:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+  --f-sd:"Noto Sans Siddham",serif; --f-dv:"Noto Serif Devanagari",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1b1916; --card:#23201c; --sunk:#2c2823; --ink:#ebe3d4; --ink-2:#aa9e8e; --ink-3:#9c9182; --rule:#3a352e;
+  --zhu:#de6f57; --indigo:#93b4da; --gold:#cfa85e; --ok:#7cc29a; --bad:#e07a66; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#1b1916; --card:#23201c; --sunk:#2c2823; --ink:#ebe3d4; --ink-2:#aa9e8e; --ink-3:#9c9182; --rule:#3a352e;
+  --zhu:#de6f57; --indigo:#93b4da; --gold:#cfa85e; --ok:#7cc29a; --bad:#e07a66; color-scheme:dark;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.75 var(--f-zh);padding:0 16px}
+a{color:inherit}
+.topbar{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;
+  padding-block:calc(1rem + env(safe-area-inset-top,0px)) 1rem;border-bottom:1px solid var(--rule)}
+.brand{font-weight:700;font-size:1.3rem;letter-spacing:.2em}
+.brand a{text-decoration:none}
+.brand .home{color:var(--zhu);font-size:.75rem;letter-spacing:.3em;margin-left:.6em;font-weight:400}
+.brand .home:hover{text-decoration:underline}
+.navlinks{display:flex;gap:1.2rem}
+.navlinks a{text-decoration:none;color:var(--ink-2);padding-bottom:2px;border-bottom:2px solid transparent}
+.navlinks a[aria-current]{color:var(--ink);border-color:var(--zhu)}
+main{max-width:64rem;margin:0 auto;padding-block:2rem 3rem;min-height:60vh}
+.colophon{max-width:64rem;margin:0 auto;padding-block:1.5rem 2.5rem;border-top:1px solid var(--rule);color:var(--ink-3);font-size:.82rem}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);margin:.2rem 0 .6rem;letter-spacing:.08em}
+h2{font-size:1.2rem;letter-spacing:.1em;margin:2.2rem 0 .8rem}
+.eyebrow{color:var(--zhu);letter-spacing:.3em;font-size:.82rem;margin:0}
+.lede{color:var(--ink-2);max-width:42rem;margin:0}
+/* 課表 */
+.units{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:.9rem}
+.unit{display:grid;grid-template-columns:3.2rem 1fr auto;gap:1rem;align-items:center;padding:1rem 1.2rem;background:var(--card);
+  border:1px solid var(--rule);border-radius:4px;text-decoration:none}
+a.unit:hover{border-color:var(--zhu)}
+.unit .num{font:600 1.6rem/1 var(--f-la);color:var(--zhu);text-align:center}
+.unit h3{margin:0;font-size:1.08rem;letter-spacing:.06em}
+.unit p{margin:.1rem 0 0;color:var(--ink-2);font-size:.9rem}
+.unit .state{font-size:.8rem;color:var(--ink-3);white-space:nowrap}
+.unit.soon{opacity:.6}
+.meter{height:4px;background:var(--sunk);border-radius:2px;margin-top:.5rem;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok)}
+/* 字母 */
+.group h2 small{font:500 .95rem var(--f-la);color:var(--ink-3);letter-spacing:0;margin-left:.6rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(5.6rem,1fr));gap:.6rem}
+.letter{all:unset;cursor:pointer;display:grid;justify-items:center;gap:.1rem;padding:.7rem .3rem .55rem;background:var(--card);
+  border:1px solid var(--rule);border-radius:4px;text-align:center;position:relative}
+.letter:hover,.letter:focus-visible{border-color:var(--zhu);outline:none}
+.letter[aria-pressed="true"]{border-color:var(--zhu);box-shadow:0 0 0 1px var(--zhu) inset}
+.letter .sd{font:2.4rem/1.4 var(--f-sd)}
+.letter .ia{font:italic 600 1.15rem/1.2 var(--f-la);color:var(--indigo)}
+.letter .ipa{font:.8rem/1.2 var(--f-la);color:var(--ink-3)}
+.letter .dot{position:absolute;top:.35rem;right:.4rem;width:.45rem;height:.45rem;border-radius:50%;background:var(--sunk)}
+.letter .dot.b2{background:var(--gold)}.letter .dot.b3{background:var(--ok)}
+.detail{margin-top:1.4rem;padding:1.4rem;background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--zhu);border-radius:4px;
+  display:grid;grid-template-columns:auto 1fr;gap:.4rem 1.6rem;align-items:start}
+.detail .big{grid-row:span 4;text-align:center}
+.detail .big .sd{font:4.5rem/1.1 var(--f-sd);display:block}
+.detail .big .dv{font:1.4rem var(--f-dv);color:var(--ink-2)}
+.detail .ia{font:italic 600 1.8rem/1.2 var(--f-la);color:var(--indigo)}
+.detail .ipa{font:1.05rem var(--f-la);color:var(--ink-2);margin-left:.6rem}
+.detail .how{margin:0}
+.detail .gate{margin:0;color:var(--ink-2)}
+.detail .gate b{color:var(--ink);font-weight:400}
+.detail .src{font-size:.78rem;color:var(--ink-3);margin:0}
+.detail .src a{color:var(--gold)}
+@media (max-width:520px){.detail{grid-template-columns:1fr}.detail .big{grid-row:auto}.grid{grid-template-columns:repeat(auto-fill,minmax(4.6rem,1fr))}.letter .sd{font-size:2rem}}
+.note{background:var(--sunk);border-radius:4px;padding:.9rem 1.1rem;color:var(--ink-2);font-size:.92rem;margin:1.4rem 0 0}
+/* 練習 */
+.drill{max-width:30rem;margin:1.5rem auto 0;text-align:center}
+.modes{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.modes button,.choices button,.next{font:inherit;color:inherit;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:.45rem 1rem;cursor:pointer}
+.modes button[aria-pressed="true"]{border-color:var(--zhu);color:var(--zhu)}
+.prompt{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1.6rem 1rem;min-height:9rem;display:grid;place-items:center}
+.prompt .sd{font:5rem/1.7 var(--f-sd)}
+.prompt .ia{font:italic 600 2.6rem/1 var(--f-la);color:var(--indigo)}
+.prompt .gate{font-size:1.1rem}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem}
+.choices button{padding:.8rem;min-height:3.6rem}
+.choices .sd{font:2.2rem/1 var(--f-sd)}
+.choices .ia{font:italic 600 1.35rem var(--f-la)}
+.choices button.ok{border-color:var(--ok);color:var(--ok);box-shadow:0 0 0 1px var(--ok) inset}
+.choices button.bad{border-color:var(--bad);color:var(--bad)}
+.feedback{min-height:3rem;margin-top:1rem;color:var(--ink-2);font-size:.92rem}
+.tally{color:var(--ink-3);font-size:.85rem;margin-top:.4rem}

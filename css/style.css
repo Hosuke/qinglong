@@ -1,0 +1,98 @@
+/* 青龍 · 總門 —— 與 學梵 同一家數 */
+:root{
+  --paper:#f5f0e6; --card:#fbf8f1; --sunk:#ece5d6; --ink:#2b2620; --ink-2:#6b6157; --ink-3:#72675a; --rule:#ddd3c1;
+  --zhu:#a8392b; --indigo:#2f4a6b; --gold:#8a6a2f; --ok:#2f6b4a;
+  --petal:#efe6d3; --aura:#b8914a;
+  --f-zh:"LXGW WenKai TC","Songti TC","Noto Serif TC",serif;
+  --f-la:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1b1916; --card:#23201c; --sunk:#2c2823; --ink:#ebe3d4; --ink-2:#aa9e8e; --ink-3:#9c9182; --rule:#3a352e;
+  --zhu:#de6f57; --indigo:#93b4da; --gold:#cfa85e; --ok:#7cc29a;
+  --petal:#26221d; --aura:#cfa85e; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#1b1916; --card:#23201c; --sunk:#2c2823; --ink:#ebe3d4; --ink-2:#aa9e8e; --ink-3:#9c9182; --rule:#3a352e;
+  --zhu:#de6f57; --indigo:#93b4da; --gold:#cfa85e; --ok:#7cc29a;
+  --petal:#26221d; --aura:#cfa85e; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.8 var(--f-zh);padding:0 16px}
+a{color:inherit}
+.topbar,main,.colophon{max-width:56rem;margin:0 auto}
+
+.topbar{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem 1.5rem;
+  padding-block:calc(1rem + env(safe-area-inset-top,0px)) 1rem;border-bottom:1px solid var(--rule)}
+.brand{text-decoration:none;font-weight:700;font-size:1.3rem;letter-spacing:.2em}
+.brand span{font:italic 500 .95rem var(--f-la);color:var(--zhu);letter-spacing:.06em;margin-left:.7em}
+.host{font:500 .95rem var(--f-la);color:var(--ink-3);letter-spacing:.04em}
+
+/* 首 */
+.hero{text-align:center;padding-block:2.6rem 1rem}
+.mark{all:unset;cursor:pointer;display:block;margin:0 auto;width:min(17rem,66vw);aspect-ratio:1;border-radius:50%;-webkit-tap-highlight-color:transparent}
+.mark:focus-visible{outline:2px solid var(--zhu);outline-offset:6px}
+.logo{display:block;width:100%;height:100%;overflow:visible}
+.mark-cap{margin:.9rem 0 0;color:var(--ink-3);font-size:.82rem;letter-spacing:.12em}
+.mark-cap i{font:italic 600 1.05rem var(--f-la);color:var(--gold);letter-spacing:.02em;margin-right:.3em}
+.eyebrow{color:var(--zhu);letter-spacing:.3em;font-size:.82rem;margin:2.2rem 0 0}
+h1{font-size:clamp(2.2rem,7vw,3.2rem);line-height:1.2;margin:.2rem 0 1rem;letter-spacing:.35em;text-indent:.35em;font-weight:700}
+.lede{color:var(--ink-2);max-width:36rem;margin:0 auto;text-align:justify;text-align-last:center}
+
+/* 宗旨 */
+.tenet{max-width:36rem;margin:2.6rem auto 0;padding:1.4rem 1.6rem;background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--zhu);border-radius:4px}
+.tenet h2{margin:0 0 .3rem;font-size:1.35rem;letter-spacing:.25em}
+.tenet p{margin:0;color:var(--ink-2);font-size:.95rem}
+
+/* 諸部 */
+.sect{font-size:1.2rem;letter-spacing:.3em;margin:3.2rem 0 1rem;display:flex;align-items:center;gap:1rem}
+.sect::after{content:"";flex:1;height:1px;background:var(--rule)}
+.works{list-style:none;padding:0;margin:0 0 3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:.9rem}
+.works li{display:flex}
+.work{flex:1;display:flex;flex-direction:column;gap:.35rem;padding:1.1rem 1.3rem 1rem;background:var(--card);border:1px solid var(--rule);
+  border-radius:4px;text-decoration:none;transition:border-color .2s}
+a.work:hover,a.work:focus-visible{border-color:var(--zhu);outline:none}
+.work .head{display:flex;align-items:baseline;gap:.7rem}
+.work h3{margin:0;font-size:1.2rem;letter-spacing:.12em}
+.work .head i{font:italic 500 1rem var(--f-la);color:var(--indigo)}
+.work p{margin:0;flex:1;color:var(--ink-2);font-size:.93rem}
+.work .foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:.5rem;padding-top:.6rem;border-top:1px dashed var(--rule)}
+.work .url{font:500 .9rem var(--f-la);color:var(--ink-3);overflow-wrap:anywhere;text-align:right}
+.state{font-size:.8rem;letter-spacing:.12em;white-space:nowrap;display:inline-flex;align-items:center;gap:.45em;color:var(--ink-2)}
+.state::before{content:"";width:.42rem;height:.42rem;border-radius:50%;background:currentColor}
+.state.live{color:var(--ok)} .state.trial{color:var(--gold)} .state.prep{color:var(--ink-3)}
+.work.soon{background:transparent;border-style:dashed}
+.work.soon h3,.work.soon p{color:var(--ink-3)}
+
+.colophon{padding-block:1.5rem calc(2.5rem + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8rem}
+.colophon p{margin:0 0 .3rem}
+
+/* ── 標識：月輪・八葉・鑁 ──
+   靜態樣式即終態；動畫只在 .play 且允許動效時施加。 */
+.logo .po{fill:var(--petal);stroke:var(--ink-2);stroke-width:1;stroke-linejoin:round}
+.logo .pi{fill:none;stroke:var(--gold);stroke-width:.7;opacity:.75}
+.logo .petal{transform-box:view-box;transform-origin:0 0}
+.logo .aura{fill:none;stroke:var(--aura);stroke-width:5;opacity:.22}
+.logo .moon-fill{fill:var(--card)}
+.logo .moon-line{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-dasharray:1 1;stroke-dashoffset:0}
+.logo .va,.logo .bindu{fill:var(--gold)}
+.logo .wipe{transform:translateY(1000px)}
+.logo .bindu{transform-box:fill-box;transform-origin:center}
+.logo .bindu-glow{fill:var(--aura);opacity:0}
+
+@media (prefers-reduced-motion:no-preference){
+  .logo.play .moon-line{animation:ql-draw .8s cubic-bezier(.55,.1,.35,1) both}
+  .logo.play .moon-fill{animation:ql-fade .7s ease-out .1s both}
+  .logo.play .petal{animation:ql-unfold .62s cubic-bezier(.2,.75,.3,1) calc(.6s + var(--i) * .08s) both}
+  .logo.play .wipe{animation:ql-write 1.2s cubic-bezier(.45,.08,.4,1) 1.6s both}
+  .logo.play .bindu{animation:ql-bindu .4s cubic-bezier(.3,1.4,.5,1) 2.8s both}
+  .logo.play .bindu-glow{animation:ql-glow 1.1s ease-out 2.8s both}
+  .logo.play .aura{animation:ql-fade .6s ease-out 2.8s both,ql-breathe 8s ease-in-out 3.4s infinite}
+  .logo .aura{animation:ql-breathe 8s ease-in-out infinite}
+}
+@keyframes ql-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes ql-fade{from{opacity:0}}
+@keyframes ql-unfold{from{transform:rotate(-28deg) scale(.2);opacity:0}40%{opacity:1}to{transform:none;opacity:1}}
+@keyframes ql-write{from{transform:translateY(0)}to{transform:translateY(1000px)}}
+@keyframes ql-bindu{from{transform:scale(.2);opacity:0}to{transform:none;opacity:1}}
+@keyframes ql-glow{0%{opacity:0}35%{opacity:.9}100%{opacity:0}}
+@keyframes ql-breathe{0%,100%{opacity:.22}50%{opacity:.5}}
