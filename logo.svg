@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="logo" viewBox="-100 -100 200 200" width="512" height="512" role="img" aria-labelledby="ql-logo-t">
+<style>
+.logo{--petal:#efe6d3;--ink:#2b2620;--ink-2:#6b6157;--gold:#8a6a2f;--aura:#b8914a;--card:#fbf8f1}
+@media (prefers-color-scheme:dark){.logo{--petal:#26221d;--ink:#ebe3d4;--ink-2:#aa9e8e;--gold:#cfa85e;--aura:#cfa85e;--card:#23201c}}
+.po{fill:var(--petal);stroke:var(--ink-2);stroke-width:1;stroke-linejoin:round}.pi{fill:none;stroke:var(--gold);stroke-width:.7;opacity:.75}
+.aura{fill:none;stroke:var(--aura);stroke-width:5;opacity:.3}.moon-fill{fill:var(--card)}.moon-line{fill:none;stroke:var(--ink);stroke-width:1.4}
+.va,.bindu{fill:var(--gold)}.bindu-glow{display:none}
+</style>
+        <title id="ql-logo-t">青龍：八葉蓮華上月輪，中書悉曇種子字 鑁（vaṃ）</title>
+        <defs>
+          <filter id="ql-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.2"/></filter>
+          
+        </defs>
+        <g class="lotus">
+          <g transform="rotate(0)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(45)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(90)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(135)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(180)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(225)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(270)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+          <g transform="rotate(315)"><g class="petal"><path class="po" d="M0-34C20-50 25-78 0-96-25-78-20-50 0-34Z"/><path class="pi" d="M0-56C10-64 13-78 0-88-13-78-10-64 0-56Z"/></g></g>
+        </g>
+        <circle class="aura" r="50" filter="url(#ql-soft)"/>
+        <circle class="moon-fill" r="50"/>
+        <circle class="moon-line" r="50" transform="rotate(-90)"/>
+        <g class="vam" transform="translate(0 2) scale(.08) translate(-310 392.5)">
+          <!-- Noto Sans Siddham 2.005 (SIL OFL 1.1): U+115AA SIDDHAM LETTER VA + U+115BD SIDDHAM SIGN ANUSVARA, shaped by HarfBuzz; see tools/extract_vam.py -->
+          <path class="va" d="M424 110Q350 59 322.5 19.5Q295 -20 295 -58Q230 -92 171.5 -131.0Q113 -170 76.5 -216.0Q40 -262 40 -318Q40 -356 73.5 -387.0Q107 -418 160.5 -448.0Q214 -478 274 -514Q220 -550 192.5 -573.0Q165 -596 155.0 -611.0Q145 -626 145 -638Q145 -652 157 -659Q178 -646 202 -637Q220 -666 255 -666Q284 -666 308.5 -655.5Q333 -645 367 -645Q400 -645 432.5 -654.5Q465 -664 490 -683L580 -620Q539 -573 488.0 -535.5Q437 -498 385 -465V-50Q385 -3 399.0 26.5Q413 56 447 84ZM130 -257Q130 -219 168.5 -185.0Q207 -151 295 -100V-412Q249 -385 211.5 -360.0Q174 -335 152.0 -309.5Q130 -284 130 -257Z"/>
+          <path class="bindu" d="M333 -759 242 -821 336 -895 426 -832Z"/>
+        </g>
+      </svg>
