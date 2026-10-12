@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梵音入门 · 青龍學梵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fffdf7;
+    --paper2:#f6ecd6;
+    --ink:#2c2118;
+    --ink2:#4a3b2f;
+    --ink3:#8a7a63;
+    --gold:#b1884d;
+    --gold-deep:#8f6a38;
+    --gold-tint:rgba(177,136,77,.14);
+    --line:#e3d7bd;
+    --line-soft:#efe6d0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+    color:var(--ink);
+    background:linear-gradient(115deg,#fffdf7 0%,#f7edd9 34%,#fdf8ec 62%,#f3e7cd 100%);
+    background-size:220% 220%;
+    animation:bgdrift 36s ease-in-out infinite;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    opacity:0;
+    animation:bgdrift 36s ease-in-out infinite, fadein .8s ease forwards;
+  }
+  @keyframes bgdrift{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
+  @keyframes fadein{to{opacity:1}}
+  ::selection{background:var(--ink);color:var(--paper);}
+
+  /* ---------- 顶栏 ---------- */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.85rem clamp(1.2rem,4vw,3rem);
+    background:rgba(255,253,247,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:900;letter-spacing:.42em;font-size:.95rem;color:var(--ink);}
+  .brand small{display:block;letter-spacing:.18em;font-weight:400;font-size:.62rem;color:var(--ink3);margin-top:.1em;}
+  nav.chapters{display:flex;gap:clamp(.8rem,2.4vw,1.8rem);flex-wrap:wrap;}
+  nav.chapters a{
+    color:var(--ink2);text-decoration:none;font-size:.8rem;letter-spacing:.14em;
+    padding-bottom:.15em;border-bottom:1px solid transparent;transition:border-color .25s,color .25s;
+  }
+  nav.chapters a:hover{color:var(--gold-deep);border-bottom-color:var(--gold);}
+
+  main{max-width:1060px;margin:0 auto;padding:0 clamp(1.2rem,4vw,3rem);}
+
+  /* ---------- 卷首 ---------- */
+  .hero{padding:clamp(3.4rem,9vh,6rem) 0 clamp(2.2rem,5vh,3.4rem);text-align:center;}
+  .hero .kana{
+    font-size:.72rem;letter-spacing:.6em;color:var(--gold-deep);margin-bottom:1.6rem;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem,7.2vw,4.6rem);font-weight:900;letter-spacing:.3em;text-indent:.3em;
+    color:var(--ink);line-height:1.25;
+  }
+  .hero .sub{
+    margin-top:1.5rem;font-size:.92rem;color:var(--ink2);letter-spacing:.2em;
+  }
+  .hero .sub em{font-style:normal;color:var(--gold-deep);}
+  .hero .rule{
+    width:56px;height:1px;background:var(--gold);margin:2rem auto 0;position:relative;
+  }
+  .hero .rule::after{
+    content:"";position:absolute;left:50%;top:-2.5px;width:5px;height:5px;border-radius:50%;
+    background:var(--gold);transform:translateX(-50%);
+  }
+
+  .notice{
+    border:1px solid var(--line);border-left:3px solid var(--gold);
+    background:rgba(255,255,255,.5);
+    padding:1.1rem 1.4rem;font-size:.82rem;color:var(--ink2);letter-spacing:.04em;
+    margin-bottom:1rem;
+  }
+  .notice b{color:var(--gold-deep);font-weight:700;}
+
+  /* ---------- 章节 ---------- */
+  section.chapter{padding:clamp(2.6rem,6vh,4.2rem) 0 1rem;}
+  .chap-head{display:flex;align-items:baseline;gap:1.1rem;border-bottom:1px solid var(--ink);padding-bottom:.7rem;margin-bottom:.4rem;}
+  .chap-num{font-size:.8rem;letter-spacing:.5em;color:var(--gold-deep);font-weight:700;white-space:nowrap;}
+  .chap-title{font-size:clamp(1.4rem,3.4vw,1.9rem);font-weight:900;letter-spacing:.22em;}
+  .chap-en{margin-left:auto;font-size:.68rem;letter-spacing:.28em;color:var(--ink3);text-transform:uppercase;white-space:nowrap;}
+  .chap-lead{font-size:.86rem;color:var(--ink2);margin:1.1rem 0 1.8rem;max-width:44em;}
+  .chap-lead b{color:var(--ink);}
+
+  /* ---------- 播放按钮 ---------- */
+  .play{
+    display:inline-flex;align-items:center;gap:.55em;
+    font-family:inherit;font-size:.76rem;letter-spacing:.14em;
+    color:var(--gold-deep);background:transparent;
+    border:1px solid var(--gold);border-radius:999px;
+    padding:.34em 1.05em .34em .9em;cursor:pointer;
+    transition:background .25s,color .25s,border-color .25s;
+    white-space:nowrap;flex:none;
+  }
+  .play:hover{background:var(--gold-tint);}
+  .play .ico{font-size:.72em;line-height:1;min-width:1.1em;text-align:center;}
+  .play .dur{color:var(--ink3);letter-spacing:.06em;font-size:.92em;}
+  .play.playing{background:var(--gold);color:var(--paper);border-color:var(--gold);}
+  .play.playing .dur{color:rgba(255,253,247,.75);}
+  .eq{display:none;align-items:flex-end;gap:2px;height:.85em;}
+  .eq i{width:2.5px;background:currentColor;animation:eq 0.9s ease-in-out infinite;}
+  .eq i:nth-child(1){height:45%;}
+  .eq i:nth-child(2){height:100%;animation-delay:.18s;}
+  .eq i:nth-child(3){height:65%;animation-delay:.36s;}
+  .play.playing .eq{display:inline-flex;}
+  .play.playing .ico{display:none;}
+  @keyframes eq{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+
+  /* ---------- 发音版本切换 ---------- */
+  .mode-switch{
+    display:flex;align-items:stretch;flex-wrap:wrap;
+    border:1px solid var(--line);background:rgba(255,255,255,.5);
+    margin-bottom:1rem;
+  }
+  .ms-label{
+    display:flex;align-items:center;padding:.75rem 1.2rem;
+    font-size:.76rem;font-weight:700;letter-spacing:.34em;color:var(--ink2);
+    border-right:1px solid var(--line);white-space:nowrap;
+  }
+  .ms-btn{
+    flex:1;min-width:170px;font-family:inherit;background:transparent;border:none;cursor:pointer;
+    padding:.7rem 1rem;font-size:.88rem;font-weight:600;letter-spacing:.12em;color:var(--ink2);
+    transition:background .25s,color .25s;
+  }
+  .ms-btn span{display:block;font-size:.64rem;font-weight:400;color:var(--ink3);letter-spacing:.18em;margin-top:.2em;}
+  .ms-btn + .ms-btn{border-left:1px solid var(--line);}
+  .ms-btn:not(.active):hover{background:var(--gold-tint);}
+  .ms-btn.active{background:var(--gold);color:var(--paper);}
+  .ms-btn.active span{color:rgba(255,253,247,.82);}
+
+  .mantra .ipa{font-size:.76rem;color:var(--gold-deep);letter-spacing:.1em;margin-top:.12rem;}
+
+  /* ---------- 元音 ---------- */
+  .vowel-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    border-top:1px solid var(--line);border-left:1px solid var(--line);
+  }
+  .vowel{
+    background:var(--paper);padding:1.35rem 1.2rem 1.15rem;position:relative;
+    border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    transition:background .3s;
+  }
+  .vowel:hover{background:#fff;}
+  .vowel .glyph{font-size:2.5rem;font-weight:700;line-height:1.1;color:var(--ink);}
+  .vowel .tag{
+    display:inline-block;margin-top:.55rem;font-size:.66rem;letter-spacing:.3em;color:var(--gold-deep);
+    border:1px solid var(--line);padding:.1em .7em .1em .95em;border-radius:999px;
+  }
+  .vowel .hint{margin-top:.5rem;font-size:.8rem;color:var(--ink2);}
+  .vowel .play{margin-top:.85rem;}
+  .vowel.playing{background:var(--gold-tint);}
+
+  /* ---------- 辅音表 ---------- */
+  .cons-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--paper);}
+  table.cons{border-collapse:collapse;width:100%;min-width:640px;}
+  table.cons th,table.cons td{
+    border:1px solid var(--line-soft);padding:.72rem .5rem;text-align:center;vertical-align:middle;
+  }
+  table.cons thead th{
+    font-size:.68rem;letter-spacing:.24em;color:var(--gold-deep);font-weight:700;background:var(--paper2);
+    border-bottom:1px solid var(--line);
+  }
+  table.cons tbody th{
+    font-size:.78rem;letter-spacing:.3em;color:var(--ink2);background:var(--paper2);font-weight:700;
+    writing-mode:horizontal-tb;white-space:nowrap;
+  }
+  table.cons td .L{font-size:1.45rem;font-weight:700;display:block;line-height:1.2;}
+  table.cons td .p{font-size:.68rem;color:var(--ink3);letter-spacing:.08em;display:block;margin-top:.15rem;}
+  table.cons td.asp{background:var(--gold-tint);}
+  table.cons td.nasal .L{color:var(--gold-deep);}
+  .cons-note{font-size:.78rem;color:var(--ink2);margin-top:.9rem;}
+  .cons-note b{color:#9c3f2e;}
+
+  .play-rows{margin-top:1.6rem;display:flex;flex-direction:column;gap:.9rem;}
+  .play-row{
+    display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;
+    border:1px solid var(--line);background:rgba(255,255,255,.45);padding:.85rem 1.2rem;
+  }
+  .play-row .lab{font-size:.82rem;font-weight:700;letter-spacing:.2em;min-width:6.5em;}
+  .play-row .seq{font-size:.95rem;color:var(--ink2);letter-spacing:.18em;flex:1;min-width:14em;}
+  .play-row.playing{background:var(--gold-tint);}
+
+  /* ---------- 特殊符号 ---------- */
+  .sign-list{display:flex;flex-direction:column;}
+  .sign{
+    display:grid;grid-template-columns:5.2rem 1fr;gap:1.2rem;
+    padding:1.5rem 0;border-bottom:1px solid var(--line);
+  }
+  .sign:last-child{border-bottom:none;}
+  .sign .g{font-size:2.4rem;font-weight:700;text-align:center;color:var(--gold-deep);line-height:1.2;}
+  .sign .t b{font-size:1rem;letter-spacing:.12em;}
+  .sign .t p{font-size:.84rem;color:var(--ink2);margin-top:.2rem;}
+  .examples{margin-top:.8rem;display:flex;flex-direction:column;gap:.55rem;}
+  .ex{
+    display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+    padding:.55rem 1rem;border:1px solid var(--line-soft);background:rgba(255,255,255,.4);
+    transition:background .25s;
+  }
+  .ex .w{font-size:1.02rem;font-weight:600;min-width:7.5em;letter-spacing:.04em;}
+  .ex .m{font-size:.78rem;color:var(--ink3);flex:1;min-width:10em;}
+  .ex.playing{background:var(--gold-tint);}
+
+  /* ---------- 真言 ---------- */
+  .mantra-list{display:flex;flex-direction:column;}
+  .mantra{
+    display:grid;grid-template-columns:3.4rem 1fr auto;gap:1.3rem;align-items:center;
+    padding:1.6rem .4rem;border-bottom:1px solid var(--line);
+    transition:background .3s;
+  }
+  .mantra:last-child{border-bottom:none;}
+  .mantra .no{
+    font-size:1.5rem;color:var(--gold);font-weight:700;text-align:center;line-height:1;
+    border-right:1px solid var(--line);padding-right:1rem;height:3.2rem;display:flex;align-items:center;justify-content:center;
+  }
+  .mantra .body .name{font-size:1.02rem;font-weight:700;letter-spacing:.1em;}
+  .mantra .body .name .where{font-size:.7rem;color:var(--ink3);letter-spacing:.2em;margin-left:.8em;font-weight:400;}
+  .mantra .iast{
+    font-size:clamp(1.05rem,2.6vw,1.3rem);color:var(--ink);letter-spacing:.06em;margin-top:.35rem;font-weight:600;
+  }
+  .mantra .duiyin{font-size:.8rem;color:var(--gold-deep);letter-spacing:.3em;margin-top:.25rem;}
+  .mantra .gloss{font-size:.78rem;color:var(--ink2);margin-top:.4rem;}
+  .mantra.long{align-items:start;padding:2.2rem .6rem;}
+  .mantra.long .iast{font-size:.95rem;line-height:2.05;letter-spacing:.04em;font-weight:400;}
+  .mantra.long .ipa{font-size:.72rem;line-height:1.9;letter-spacing:.05em;}
+  .mantra.long .duiyin{letter-spacing:.14em;line-height:2.05;}
+  .mantra .gloss b{color:var(--ink);font-weight:700;}
+  .mantra.playing{background:linear-gradient(90deg,var(--gold-tint),transparent 70%);}
+
+  /* ---------- 心法 ---------- */
+  .tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .tip{background:var(--paper);padding:1.5rem 1.4rem;}
+  .tip h4{font-size:.9rem;letter-spacing:.2em;color:var(--gold-deep);margin-bottom:.5rem;}
+  .tip h4 .x{font-size:.72rem;color:var(--ink3);letter-spacing:.1em;margin-left:.6em;}
+  .tip p{font-size:.83rem;color:var(--ink2);}
+  .tip p code{font-family:inherit;background:var(--paper2);padding:.05em .4em;border:1px solid var(--line-soft);font-size:.92em;}
+
+  footer{
+    margin-top:4rem;border-top:1px solid var(--ink);
+    padding:2rem clamp(1.2rem,4vw,3rem) 3rem;text-align:center;
+  }
+  footer .f1{font-size:.78rem;letter-spacing:.24em;color:var(--ink2);}
+  footer .f2{font-size:.68rem;color:var(--ink3);margin-top:.6rem;letter-spacing:.1em;max-width:56em;margin-left:auto;margin-right:auto;line-height:2;}
+
+  @media (max-width:720px){
+    .mantra{grid-template-columns:2.4rem 1fr;grid-template-rows:auto auto;}
+    .mantra .play{grid-column:2;justify-self:start;margin-top:.4rem;}
+    .mantra .no{padding-right:.6rem;height:2.6rem;}
+    .sign{grid-template-columns:3.6rem 1fr;}
+    nav.chapters{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">梵音入門<small>SANSKRIT SOUNDS · 有声学习</small></div>
+  <nav class="chapters">
+    <a href="#c1">壹 · 框架词</a>
+    <a href="#c2">贰 · 元音</a>
+    <a href="#c3">叁 · 辅音</a>
+    <a href="#c4">肆 · 符号</a>
+    <a href="#c5">伍 · 真言</a>
+    <a href="#c6">陆 · 加行</a>
+    <a href="#c7">柒 · 心法</a>
+    <a href="#c8">捌 · 大咒</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kana">青龍 · 學梵 · 有聲篇</div>
+    <h1>梵音入門</h1>
+    <div class="sub">点击任意 <em>（播放）</em>，跟读三遍 —— 日日不辍，自能拼读常诵真言</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="notice">
+    <b>双音层说明：</b>本页每条发音提供两层——<b>梵音 · IPA 人声</b>（默认）：依国际音标逐音素合成，长短音、送气、卷舌皆按古典梵音推导，以印地语神经嗓音发声——印地语与梵语音系同源，齿音、卷舌、浊送气一应俱全，听感近于人声诵经，供您校准发音细节；<b>唐音 · 汉字拟音</b>：书中"对音"一列的汉字读法（ra 读"拉"、tha 读"他"），亲切易跟，作入门拐棍。真言条目中方括号内为国际音标。密咒真传，仍以阿阇梨口授为准。
+  </div>
+
+  <div class="mode-switch">
+    <span class="ms-label">发音版本</span>
+    <button class="ms-btn active" data-mode="skt">梵音 · IPA 人声<span>音素精确 · 自然嗓音</span></button>
+    <button class="ms-btn" data-mode="cni">唐音 · 汉字拟音<span>亲切易跟 · 中文口音</span></button>
+  </div>
+
+  <!-- 壹 · 框架词 -->
+  <section class="chapter" id="c1">
+    <div class="chap-head">
+      <span class="chap-num">壹</span>
+      <span class="chap-title">先学三个框架词</span>
+      <span class="chap-en">Three Frame Words</span>
+    </div>
+    <p class="chap-lead">常诵真言，几乎每一咒都由这三个词开头或收尾。先听熟它们，真言的"骨架"就立起来了：<b>唵</b>是起首的礼敬信号，<b>那摩</b>是"归命"，<b>娑婆诃</b>是结尾的"愿此成就"。</p>
+    <div class="play-rows">
+      <div class="play-row" data-audio="audio/x_om.mp3" data-skt="audio/ipa_x_om.mp3">
+        <span class="lab">oṃ 唵</span>
+        <span class="seq">神圣起首音 · [oːm] · a+u+m 三音合一，表佛法僧三宝</span>
+        <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+      </div>
+      <div class="play-row" data-audio="audio/x_namah.mp3" data-skt="audio/ipa_x_namah.mp3">
+        <span class="lab">namaḥ 那摩</span>
+        <span class="seq">归命、礼敬 · [namah] · 后接尊名，即"南无"</span>
+        <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+      </div>
+      <div class="play-row" data-audio="audio/m_svaha.mp3" data-skt="audio/ipa_m_svaha.mp3">
+        <span class="lab">svāhā 娑婆诃</span>
+        <span class="seq">愿此成就 · [sʋaːhaː] · 真言的"句号"，两个 ā 都要拉长</span>
+        <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 贰 · 元音 -->
+  <section class="chapter" id="c2">
+    <div class="chap-head">
+      <span class="chap-num">贰</span>
+      <span class="chap-title">元音十一</span>
+      <span class="chap-en">Vowels · Short &amp; Long</span>
+    </div>
+    <p class="chap-lead">梵文元音<b>长短成对</b>：长音的时值是短音的两倍，这就是持咒的节奏本身。带横线的 ā ī ū 是长音，务必拖足。e 与 o 天生就是长音，口型保持不动，不要滑成"ei""ou"。</p>
+    <div class="vowel-grid" id="vowelGrid"></div>
+  </section>
+
+  <!-- 叁 · 辅音 -->
+  <section class="chapter" id="c3">
+    <div class="chap-head">
+      <span class="chap-num">叁</span>
+      <span class="chap-title">辅音五类二十五</span>
+      <span class="chap-en">Consonants · Five Families</span>
+    </div>
+    <p class="chap-lead">五组辅音从<b>喉咙</b>一路排到<b>嘴唇</b>，每组都是同一个公式：不送气 → 送气 → 浊音 → 浊送气 → 鼻音。对中文母语者有一条捷径：<b>拼音的 g／k 对立就是梵文的 k／kh 对立</b>（金色一列即"送气"，多吐一口强气）。真正的浊音普通话没有，先读成拼音 g/d/b 即可。</p>
+    <div class="cons-wrap">
+      <table class="cons" id="consTable"></table>
+    </div>
+    <p class="cons-note"><b>切记：th 不是英语的"咬舌 th"</b>——它就是拼音的 "t"。所以 tathāgata（如来）读"塔-他-嘎-塔"，书中对音正作"ta ta"。卷舌行把舌尖翘起抵上颚，齿音行舌尖抵上牙背；初学先读对字母，部位慢慢练。</p>
+    <div class="play-rows">
+      <div class="play-row" data-audio="audio/c_asp.mp3" data-skt="audio/ipa_c_asp.mp3">
+        <span class="lab">送气对比</span>
+        <span class="seq">k/kh 嘎·喀　｜　t/th 哒·塔　｜　p/ph 巴·啪</span>
+        <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+      </div>
+      <div class="play-row" data-audio="audio/c_semi.mp3" data-skt="audio/ipa_c_semi.mp3">
+        <span class="lab">散音一行</span>
+        <span class="seq">y r l v ś ṣ s h　→　耶·惹·拉·哇·夏·沙·萨·哈</span>
+        <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 肆 · 特殊符号 -->
+  <section class="chapter" id="c4">
+    <div class="chap-head">
+      <span class="chap-num">肆</span>
+      <span class="chap-title">三个特殊符号</span>
+      <span class="chap-en">Anusvāra · Visarga · Ṛ</span>
+    </div>
+    <p class="chap-lead">这三样在书中出现了上百次。看懂它们，罗马字一栏就再无阻拦。</p>
+    <div class="sign-list">
+      <div class="sign">
+        <div class="g">ṃ</div>
+        <div class="t">
+          <b>随鼻音（anusvāra）</b>
+          <p>把前面的元音鼻化，约等于收尾的 -m/-n/-ng，遇什么字母随什么音：saṃbuddha 实际读 sambuddha。</p>
+          <div class="examples">
+            <div class="ex" data-audio="audio/x_om.mp3" data-skt="audio/ipa_x_om.mp3">
+              <span class="w">oṃ</span><span class="m">嗡 —— 鼻音收尾，书中对音即作 ong</span>
+              <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sign">
+        <div class="g">ḥ</div>
+        <div class="t">
+          <b>止韵（visarga）</b>
+          <p>轻轻吐一口 "h"，并带回前面元音的一点回声。唐音译作"谟"，正是这个轻尾音。</p>
+          <div class="examples">
+            <div class="ex" data-audio="audio/x_namah.mp3" data-skt="audio/ipa_x_namah.mp3">
+              <span class="w">namaḥ</span><span class="m">那摩 —— 归命，"南无"的梵文原形</span>
+              <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sign">
+        <div class="g">ṛ</div>
+        <div class="t">
+          <b>卷舌元音 ṛ</b>
+          <p>r 下面有一点，读作卷舌的 "ri"。书中 amṛta、hṛdaya 等高频词都靠它。</p>
+          <div class="examples">
+            <div class="ex" data-audio="audio/x_amrta.mp3" data-skt="audio/ipa_x_amrta.mp3">
+              <span class="w">amṛta</span><span class="m">阿蜜哩多 —— 甘露、不死（弥陀根本咒一连十一个 amṛta 复合词）</span>
+              <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+            </div>
+            <div class="ex" data-audio="audio/x_hrdaya.mp3" data-skt="audio/ipa_x_hrdaya.mp3">
+              <span class="w">hṛdaya</span><span class="m">纥哩达雅 —— 心（"一切如来心秘密"之心）</span>
+              <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sign">
+        <div class="g">dd</div>
+        <div class="t">
+          <b>双辅音＝停一拍</b>
+          <p>辅音双写时，前一个停住、后一个放出，如日语促音、意大利语双辅音。</p>
+          <div class="examples">
+            <div class="ex" data-audio="audio/x_buddha.mp3" data-skt="audio/ipa_x_buddha.mp3">
+              <span class="w">buddha</span><span class="m">布达 —— 佛；d 停半拍再放，samantabuddhānāṃ 同理</span>
+              <button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 伍 · 真言 -->
+  <section class="chapter" id="c5">
+    <div class="chap-head">
+      <span class="chap-num">伍</span>
+      <span class="chap-title">真言十七首 · 拼读实战</span>
+      <span class="chap-en">Seventeen Mantras</span>
+    </div>
+    <p class="chap-lead">前八首为诸尊常诵之真言；续增九首为道场常用真言——光明真言、千手、药师、普供养、释迦，以及<b>五方佛</b>四句（自"阿閦"起连列，配五智）。先逐音节跟读，再连贯成诵；注意<b>长音拖足、尾音戛然</b>。</p>
+    <div class="mantra-list" id="mantraList"></div>
+  </section>
+
+  <!-- 陆 · 法本加行 -->
+  <section class="chapter" id="c6">
+    <div class="chap-head">
+      <span class="chap-num">陆</span>
+      <span class="chap-title">法本加行六咒</span>
+      <span class="chap-en">Six Preparatory Rites · 十八道起手</span>
+    </div>
+    <p class="chap-lead">出自唐 不空所传十八道念诵（参 T18n0900《十八契印》），是修法起手的六支：<b>普礼</b>致敬诸如来，<b>净三业</b>净身口意，<b>佛部·莲华部·金刚部</b>三部三昧耶真言，<b>被甲</b>护身。注意莲华、金刚二咒里 a+u 连声合成 o（padma+udbhava → padmodbhava），这正是梵文的连声规则（sandhi）。</p>
+    <div class="mantra-list" id="jaboList"></div>
+  </section>
+
+  <!-- 柒 · 心法 -->
+  <section class="chapter" id="c7">
+    <div class="chap-head">
+      <span class="chap-num">柒</span>
+      <span class="chap-title">节奏与三个坑</span>
+      <span class="chap-en">Rhythm &amp; Pitfalls</span>
+    </div>
+    <p class="chap-lead">梵文不像英语有重音起伏。持咒要<b>平、稳、匀</b>：短音一拍，长音两拍，双辅音多停半拍，像敲木鱼一样匀速推进。初学最常跌进这三个坑：</p>
+    <div class="tips">
+      <div class="tip">
+        <h4>坑一 · 读成英语 th<span class="x">PITFALL Ⅰ</span></h4>
+        <p><code>th</code> 不是 think 的咬舌音，就是送气的拼音 "t"。<code>tathāgata</code> 读"塔-他-嘎-塔"；同理 <code>ph</code> 不是 photo 的 f，是送气 "p"。</p>
+      </div>
+      <div class="tip">
+        <h4>坑二 · 吞掉长音<span class="x">PITFALL Ⅱ</span></h4>
+        <p><code>svāhā</code> 读成"斯哇哈"就泄了气，必须"斯哇——哈——"。<code>tathāgata</code>、<code>mahākāla</code> 里的 ā 同理。长音是咒的骨架，不是装饰。</p>
+      </div>
+      <div class="tip">
+        <h4>坑三 · 给尾音加尾巴<span class="x">PITFALL Ⅲ</span></h4>
+        <p>罗马字里辅音后没有 a 就是真的没有：<code>traṭ</code> 读"特拉 t"戛然而止，<code>hūṃ</code> 鼻音一收就停，不要读成"吽姆"。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 捌 · 大咒 -->
+  <section class="chapter" id="c8">
+    <div class="chap-head">
+      <span class="chap-num">捌</span>
+      <span class="chap-title">大咒二首 · 登堂之作</span>
+      <span class="chap-en">Two Great Dhāraṇīs</span>
+    </div>
+    <p class="chap-lead">全书最难的两首，放在最后——它们不再考您新音，只考<b>耐力与节奏</b>：词词相连、句句相衔，全是前七章见过的零件。建议先整体听一遍跟得上，再分句跟读，最后连贯成诵。尊胜一遍约三分钟，正是禅修的一坐。</p>
+    <div class="mantra-list" id="dharaniList"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="f1">梵音入門 · 有聲學習頁</div>
+  <div class="f2">梵文依 CBETA 原典（大正藏）對勘。梵音层依国际音标逐音素合成，唐音层承唐音对译传统；学术梵音以 IAST 规则为准，密咒口传以阿阇梨亲授为准。愿见闻者，同入毗卢性海。</div>
+</footer>
+
+<script>
+/* ---------------- 数据 ---------------- */
+const VOWELS = [
+  {g:'a',  tag:'短音',   hint:'短促的"阿"，张口即收',        f:'audio/v_a.mp3',  s:'audio/ipa_v_a.mp3'},
+  {g:'ā',  tag:'长音×2', hint:'拖长的"阿——"，数足两拍',     f:'audio/v_aa.mp3', s:'audio/ipa_v_aa.mp3'},
+  {g:'i',  tag:'短音',   hint:'短"衣"',                    f:'audio/v_i.mp3',  s:'audio/ipa_v_i.mp3'},
+  {g:'ī',  tag:'长音×2', hint:'长"衣——"',                  f:'audio/v_ii.mp3', s:'audio/ipa_v_ii.mp3'},
+  {g:'u',  tag:'短音',   hint:'短"乌"',                    f:'audio/v_u.mp3',  s:'audio/ipa_v_u.mp3'},
+  {g:'ū',  tag:'长音×2', hint:'长"乌——"',                  f:'audio/v_uu.mp3', s:'audio/ipa_v_uu.mp3'},
+  {g:'ṛ',  tag:'卷舌元音', hint:'卷舌的"日依（ri）"，见肆章', f:'audio/v_r.mp3',  s:'audio/ipa_v_r.mp3'},
+  {g:'e',  tag:'本长',   hint:'"诶"，口型不动不滑音',        f:'audio/v_e.mp3',  s:'audio/ipa_v_e.mp3'},
+  {g:'ai', tag:'双元音', hint:'"爱"，比长音更长',            f:'audio/v_ai.mp3', s:'audio/ipa_v_ai.mp3'},
+  {g:'o',  tag:'本长',   hint:'"哦"，不要读成 ou',          f:'audio/v_o.mp3',  s:'audio/ipa_v_o.mp3'},
+  {g:'au', tag:'双元音', hint:'"奥"，比长音更长',            f:'audio/v_au.mp3', s:'audio/ipa_v_au.mp3'},
+];
+
+const CONS_HEAD = ['不送气','送气 ▲','浊音','浊送气','鼻音'];
+const CONS_ROWS = [
+  {row:'喉音', cells:[['k','拼音 g'],['kh','拼音 k',1],['g','浊 g'],['gh','浊 g+h'],['ṅ','ng',0,1]]},
+  {row:'腭音', cells:[['c','拼音 j'],['ch','拼音 q',1],['j','浊 j'],['jh','浊 j+h'],['ñ','ni',0,1]]},
+  {row:'卷舌', cells:[['ṭ','翘舌 d'],['ṭh','翘舌 t',1],['ḍ','翘舌浊d'],['ḍh','翘舌浊d+h'],['ṇ','翘舌 n',0,1]]},
+  {row:'齿音', cells:[['t','拼音 d'],['th','拼音 t',1],['d','浊 d'],['dh','浊 d+h'],['n','n',0,1]]},
+  {row:'唇音', cells:[['p','拼音 b'],['ph','拼音 p',1],['b','浊 b'],['bh','浊 b+h'],['m','m',0,1]]},
+];
+
+const MANTRAS = [
+  {name:'胎藏界大日如来真言', where:'悉曇證', iast:'a vi ra hūṃ khaṃ', ipa:'[a ʋi ra huːm kʰam]', dy:'阿 · 维 · 拉 · 吽 · 坑',
+   gloss:'五字严身：配地、水、火、风、空<b>五大</b>，为胎藏界大日如来的种子句。', f:'audio/m_dainichi_tai.mp3', s:'audio/ipa_m_dainichi_tai.mp3'},
+  {name:'金刚界大日如来真言', where:'对音證', iast:'oṃ vajradhātu vaṃ', ipa:'[oːm ʋadʑradʱaːt̪u ʋam]', dy:'嗡 · 哇 · 兹拉 · 驮 · 杜 · 王',
+   gloss:'<b>vajradhātu</b>＝vajra 金刚 + dhātu 界：坚固不坏的金刚世界。', f:'audio/m_dainichi_vajra.mp3', s:'audio/ipa_m_dainichi_vajra.mp3'},
+  {name:'文殊菩萨真言', where:'对音證', iast:'oṃ a ra pa ca na', ipa:'[oːm a ra pa tɕa na]', dy:'嗡 · 阿 · 拉 · 钵 · 遮 · 那',
+   gloss:'五字文殊，表<b>五智</b>；ca 读如拼音 jia，对音作"遮"是唐音。', f:'audio/m_manjusri.mp3', s:'audio/ipa_m_manjusri.mp3'},
+  {name:'弥勒菩萨真言', where:'悉曇證', iast:'oṃ maitreyāya svāhā', ipa:'[oːm mait̪reːjaːja sʋaːhaː]', dy:'嗡 · 美 · 达利 · 耶 · 耶 · 娑哇诃',
+   gloss:'<b>maitreyāya</b>＝慈氏（弥勒）的与格："归敬慈氏"。注意 yā 长音。', f:'audio/m_maitreya.mp3', s:'audio/ipa_m_maitreya.mp3'},
+  {name:'地藏菩萨真言', where:'悉曇證', iast:'oṃ ha ha ha vismaye svāhā', ipa:'[oːm ha ha ha ʋismajeː sʋaːhaː]', dy:'嗡 · 诃 · 诃 · 诃 · 维 · 娑摩 · 耶 · 娑哇诃',
+   gloss:'<b>vismaye</b>＝为令生稀有心；三个 ha 短促分明。', f:'audio/m_ksitigarbha.mp3', s:'audio/ipa_m_ksitigarbha.mp3'},
+  {name:'准提观音真言', where:'对音證', iast:'oṃ cale cule cunde svāhā', ipa:'[oːm tɕaleː tɕuleː tɕund̪eː sʋaːhaː]', dy:'嗡 · 遮梨 · 注梨 · 准提 · 娑哇诃',
+   gloss:'<b>cunde</b> 即准提尊名之呼格；c 读拼音 j，对音"遮注准"皆唐音。', f:'audio/m_cundi.mp3', s:'audio/ipa_m_cundi.mp3'},
+  {name:'大黑天真言', where:'对音證', iast:'oṃ mahākālāya svāhā', ipa:'[oːm mahaːkaːlaːja sʋaːhaː]', dy:'嗡 · 摩诃 · 迦罗 · 耶 · 娑哇诃',
+   gloss:'<b>mahākāla</b>＝mahā 大 + kāla 黑／时："摩诃迦罗"。两个 ā 拖足。', f:'audio/m_mahakala.mp3', s:'audio/ipa_m_mahakala.mp3'},
+  {name:'大日如来归命句', where:'胎藏诸咒通轨 · 悉曇證', iast:'namaḥ samantabuddhānāṃ', ipa:'[namah samant̪abud̪d̪ʱaːnaːm]', dy:'那摩 · 萨曼塔 · 布达 · 南',
+   gloss:'<b>namaḥ</b> 归命 + <b>samanta</b> 遍 + <b>buddhānāṃ</b> 诸佛之 —— "归命一切诸佛"，全书出现八次。', f:'audio/m_samanta.mp3', s:'audio/ipa_m_samanta.mp3'},
+  {name:'光明真言', where:'续增 · 大灌顶光', iast:'oṃ amogha vairocana mahāmudrā maṇi padma jvāla pravartaya hūṃ', ipa:'[oːm amogʱa ʋairotɕana mahaːmudraː maɳi padma dʑʋaːla praʋartaja huːm]', dy:'嗡 · 阿摩伽 · 毗罗遮那 · 摩诃 · 慕捺罗 · 摩尼 · 钵纳摩 · 什缚罗 · 钵罗嚩多耶 · 吽',
+   gloss:'<b>amogha</b> 不空 + <b>vairocana</b> 遍照（大日）+ <b>mahāmudrā</b> 大印 + <b>maṇi</b> 宝 + <b>padma</b> 莲 + <b>jvāla</b> 光焰 + <b>pravartaya</b> 令运转 —— 不空大光明咒，破障度亡之首选。', f:'audio/m2_guangming.mp3', s:'audio/ipa_m2_guangming.mp3'},
+  {name:'千手观音心咒', where:'续增 · 大悲心', iast:'oṃ vajradharma hrīḥ', ipa:'[oːm ʋadʑradʱarma hriːh]', dy:'嗡 · 嚩曰啰 · 达磨 · 纥哩',
+   gloss:'<b>vajradharma</b> 金刚法 + 观音种子字 <b>hrīḥ</b>（纥哩，ṛ 卷舌元音拉满，尾音 ḥ 轻吐）。', f:'audio/m2_qianshou.mp3', s:'audio/ipa_m2_qianshou.mp3'},
+  {name:'药师如来真言', where:'续增 · 除病', iast:'oṃ huru huru caṇḍāli mātaṅgi svāhā', ipa:'[oːm huru huru tɕaɳɖaːli maːt̪aŋɡi sʋaːhaː]', dy:'嗡 · 呼嚕 · 呼嚕 · 赞拏梨 · 摩腾儗 · 娑嚩贺',
+   gloss:'<b>huru huru</b> 速速 + <b>caṇḍāli、mātaṅgi</b> 二尊名 —— 祈药师速疾疗愈。注意 ḍ 是卷舌浊音。', f:'audio/m2_yaoshi.mp3', s:'audio/ipa_m2_yaoshi.mp3'},
+  {name:'普供养真言', where:'续增 · 供养仪', iast:'oṃ amogha pūjā maṇi padma vajre tathāgata vilokite samanta prasara hūṃ', ipa:'[oːm amogʱa puːdʑaː maɳi padma ʋadʑreː t̪at̪ʱaːgat̪a ʋiloːkit̪eː samant̪a prasara huːm]', dy:'嗡 · 阿摩伽 · 布惹 · 摩尼 · 钵纳摩 · 嚩日咧 · 怛他蘗多 · 毗路吉帝 · 三满多 · 钵罗娑罗 · 吽',
+   gloss:'<b>pūjā</b> 供养 + <b>vilokite</b> 观视 + <b>samanta</b> 普遍 + <b>prasara</b> 流布 —— 以一咒之供，遍流一切如来前。', f:'audio/m2_pugong.mp3', s:'audio/ipa_m2_pugong.mp3'},
+  {name:'释迦如来真言', where:'续增 · 本师', iast:'namaḥ samantabuddhānāṃ bhaḥ', ipa:'[namah samant̪abud̪d̪ʱaːnaːm bʱah]', dy:'那谟 · 萨曼多 · 勃驮喃 · 婆诃',
+   gloss:'与第八首"归命句"同骨，结尾换释迦种子字 <b>bhaḥ</b> —— 归命诸佛，专祈本师。', f:'audio/m2_shijia.mp3', s:'audio/ipa_m2_shijia.mp3'},
+  {name:'阿閦如来真言 · 东方', where:'五方佛 · 一', iast:'oṃ akṣobhya hūṃ', ipa:'[oːm akʂoːbʱja huːm]', dy:'嗡 · 阿曲鞞耶 · 吽',
+   gloss:'<b>akṣobhya</b>＝不动：东方阿閦佛，表大圆镜智。kṣ 读如"克沙"合一。', f:'audio/m2_aksobhya.mp3', s:'audio/ipa_m2_aksobhya.mp3'},
+  {name:'宝生如来真言 · 南方', where:'五方佛 · 二', iast:'oṃ ratnasaṃbhava trāḥ', ipa:'[oːm rat̪nasambʱaʋa t̪raːh]', dy:'嗡 · 啰德囊 · 三婆嚩 · 怛啰',
+   gloss:'<b>ratnasaṃbhava</b>＝ratna 宝 + saṃbhava 出生：南方宝生佛，表平等性智。trāḥ 的 ā 拖足。', f:'audio/m2_ratna.mp3', s:'audio/ipa_m2_ratna.mp3'},
+  {name:'阿弥陀如来真言 · 西方', where:'五方佛 · 三', iast:'oṃ lokeśvararāja hrīḥ', ipa:'[oːm loːkeːɕʋaraːraːdʑa hriːh]', dy:'嗡 · 路计湿嚩啰 · 啰惹 · 纥哩',
+   gloss:'<b>lokeśvararāja</b>＝loka 世间 + īśvara 自在 + rāja 王：弥陀旧译"世自在王"，表妙观察智。', f:'audio/m2_amita.mp3', s:'audio/ipa_m2_amita.mp3'},
+  {name:'不空成就如来真言 · 北方', where:'五方佛 · 四', iast:'oṃ amoghasiddhe aḥ', ipa:'[oːm amogʱasid̪d̪ʱeː ah]', dy:'嗡 · 阿谟伽 · 悉地 · 阿诃',
+   gloss:'<b>amoghasiddhi</b>＝amogha 不空 + siddhi 成就：北方不空成就佛，表成所作智。尾音 aḥ 轻吐即止。', f:'audio/m2_amogha.mp3', s:'audio/ipa_m2_amogha.mp3'},
+];
+
+const JABO = [
+  {name:'普礼真言', where:'十八道 · 起手', iast:"oṃ sarvatathāgata-pāda-vandanāṃ karomi", ipa:'[oːm sarʋat̪at̪ʱaːgat̪a paːd̪a ʋand̪anaːm karoːmi]', dy:'嗡 · 萨嚩 · 怛他 · 蘗多 · 播那 · 满娜曩 · 迦噜弭',
+   gloss:'<b>sarva</b> 一切 + <b>tathāgata</b> 如来 + <b>pāda</b> 足 + <b>vandanāṃ</b> 礼拜 + <b>karomi</b> 我作 —— "我礼拜一切如来之足"。', f:'audio/jb_puli.mp3', s:'audio/ipa_jb_puli.mp3'},
+  {name:'净三业真言', where:'十八道 · 护身法', iast:"oṃ svabhāva-śuddhāḥ sarva-dharmāḥ svabhāva-śuddho 'haṃ", ipa:'[oːm sʋabʱaːʋaɕud̪d̪ʱaːh sarʋad̪ʱarmaːh sʋabʱaːʋaɕud̪d̪ʱoː ham]', dy:'嗡 · 娑嚩婆嚩 · 秫驮 · 萨嚩 · 达磨 · 娑嚩婆嚩 · 秫度 · 憾',
+   gloss:'<b>svabhāva</b> 自性 + <b>śuddha</b> 清净 + <b>sarvadharmāḥ</b> 一切法 + <b>ahaṃ</b> 我 —— "自性清净故，一切法清净，我亦清净"。', f:'audio/jb_jingsanye.mp3', s:'audio/ipa_jb_jingsanye.mp3'},
+  {name:'佛部三昧耶真言', where:'十八道 · 护身法', iast:'oṃ tathāgatodbhavāya svāhā', ipa:'[oːm t̪at̪ʱaːgat̪oːd̪bʱaʋaːja sʋaːhaː]', dy:'嗡 · 怛他 · 蘗都 · 纳婆嚩耶 · 娑嚩贺',
+   gloss:'<b>tathāgata</b> 如来 + <b>udbhavāya</b> 出生者（与格）—— "礼敬从如来出生者"，佛部三昧耶。', f:'audio/jb_fo.mp3', s:'audio/ipa_jb_fo.mp3'},
+  {name:'莲华部三昧耶真言', where:'十八道 · 护身法', iast:'oṃ padmodbhavāya svāhā', ipa:'[oːm pad̪moːd̪bʱaʋaːja sʋaːhaː]', dy:'嗡 · 跛娜谟 · 纳婆嚩耶 · 娑嚩贺',
+   gloss:'<b>padma</b> 莲花 + <b>udbhava</b> 出生 —— 注意 padma+udbhava 连声合成 <b>padmodbhava</b>（a+u→o），这就是 sandhi。', f:'audio/jb_lian.mp3', s:'audio/ipa_jb_lian.mp3'},
+  {name:'金刚部三昧耶真言', where:'十八道 · 护身法', iast:'oṃ vajrodbhavāya svāhā', ipa:'[oːm ʋadʑroːd̪bʱaʋaːja sʋaːhaː]', dy:'嗡 · 嚩曰噜 · 纳婆嚩耶 · 娑嚩贺',
+   gloss:'<b>vajra</b> 金刚 + <b>udbhava</b> 出生 —— 三部三昧耶真言同构，只换部主；vajra 的 j 读浊音"兹拉"之"兹"。', f:'audio/jb_jin.mp3', s:'audio/ipa_jb_jin.mp3'},
+  {name:'被甲护身真言', where:'十八道 · 护身法', iast:'oṃ vajrāgni-pradīptāya svāhā', ipa:'[oːm ʋadʑraːɡniprad̪iːpt̪aːja sʋaːhaː]', dy:'嗡 · 嚩曰啰 · 儗你 · 钵啰捻 · 跛跢野 · 娑嚩贺',
+   gloss:'<b>vajra</b> 金刚 + <b>agni</b> 火（连声作 vajrāgni）+ <b>pradīptāya</b> 炽然者（与格）—— "归敬炽燃之金刚火"。原典 T18n0900《十八契印》：嚩日羅銀儞鉢囉捻跛跢也，捻对 dī，跛跢对 ptā。', f:'audio/jb_beijia.mp3', s:'audio/ipa_jb_beijia.mp3'},
+];
+
+/* ---------------- 渲染 ---------------- */
+const playBtnHTML = '<button class="play"><span class="ico">▶</span><span class="eq"><i></i><i></i><i></i></span>（播放）<span class="dur"></span></button>';
+
+document.getElementById('vowelGrid').innerHTML = VOWELS.map(v=>`
+  <div class="vowel" data-audio="${v.f}" data-skt="${v.s}">
+    <div class="glyph">${v.g}</div>
+    <span class="tag">${v.tag}</span>
+    <div class="hint">${v.hint}</div>
+    ${playBtnHTML}
+  </div>`).join('');
+
+document.getElementById('consTable').innerHTML =
+  '<thead><tr><th></th>'+CONS_HEAD.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'+
+  CONS_ROWS.map(r=>`<tr><th>${r.row}</th>${r.cells.map(c=>{
+    const cls=[c[2]?'asp':'',c[3]?'nasal':''].join(' ').trim();
+    return `<td class="${cls}"><span class="L">${c[0]}</span><span class="p">${c[1]}</span></td>`;
+  }).join('')}</tr>`).join('')+'</tbody>';
+
+const DA = [
+  {name:'阿弥陀佛根本陀罗尼', where:'对音證 · T19n0930 不空譯', long:1,
+   iast:'namo ratnatrayāya namaḥ āryāmitābhāya tathāgatāya arhate samyaksaṃbuddhāya · tadyathā · oṃ amṛte amṛtodbhave amṛtasaṃbhave amṛtagarbhe amṛtasiddhe amṛtateje amṛtavikrānte amṛtavikrāntagāmine amṛtagaganakīrtikare amṛtadundubhisvare · sarvārthasādhane sarvakarmakleśakṣayaṃkare svāhā',
+   ipa:'[namo ratnatrajaːja · namah aːrjaːmitaːbʱaːja tat̪ʱaːɡat̪aːja arhate samjaksambud̪d̪ʱaːja ‖ oːm amrit̪e amrit̪oːd̪bʱaʋe amrit̪asambʱaʋe amrit̪aɡarbʱe amrit̪asid̪d̪ʱe amrit̪at̪eːdʑe amrit̪aʋikraːnt̪e amrit̪aʋikraːnt̪aɡaːmine amrit̪aɡaɡanakiːrt̪ikare amrit̪ad̪und̪ubʱisʋare ‖ sarʋaːrt̪ʱasaːd̪ʱane sarʋakarmakleːɕakʂajaŋkare sʋaːhaː]',
+   dy:'那谟 · 啰怛那怛啰耶耶 · 那摩阿哩耶弥多婆耶 · 怛他蘗多耶 · 阿啰诃帝 · 三藐三勃陀耶 · 怛侄他 · 唵 · 阿蜜哩帝 · 阿蜜哩妒纳婆吠 · 阿蜜哩多三婆吠 · 阿蜜哩多蘗陛 · 阿蜜哩多悉帝 · 阿蜜哩多帝际 · 阿蜜哩多毗讫兰帝 · 阿蜜哩多毗讫兰多伽弥宁 · 阿蜜哩多伽伽那枳底迦隶 · 阿蜜哩多钝努枇娑嚩隶 · 萨嚩啰陀娑陀宁 · 萨嚩羯磨讫礼舍乞洒孕迦隶 · 娑嚩贺',
+   gloss:'通篇是 <b>amṛta（甘露·不死）</b>的十一种功德复合词：甘露生、甘露所生、甘露藏、甘露成就、甘露威光、甘露精进、甘露精进所行、甘露声名遍虚空、甘露雷音……末句"成就一切义利、灭尽一切业烦恼"。记牢一个 amṛta，全咒自然成串。', f:'audio/d_amita.mp3', s:'audio/ipa_d_amita.mp3'},
+  {name:'佛顶尊胜陀罗尼', where:'对音證 · 加句本 · 约三分钟', long:1,
+   iast:'namo bhagavate trailokya-prativiśiṣṭāya buddhāya bhagavate · tadyathā · oṃ viśodhaya viśodhaya samasama samantāvabhāsa-spharaṇa gatigahana svabhāva-viśuddhe · abhiṣiñcatu māṃ sugata varavacana amṛtābhiṣekair mahāmantrapadaiḥ · āhara āhara āyuḥsaṃdhāraṇi śodhaya śodhaya gagana-viśuddhe · uṣṇīṣa-vijaya-viśuddhe sahasraraśmi-saṃcodite sarvatathāgatāvalokani ṣaṭpāramitā-paripūraṇi sarvatathāgata-hṛdayādhiṣṭhānādhiṣṭhita mahāmudre vajrakāya-saṃhatana-viśuddhe · sarvāvaraṇāpāyadurgati-pariviśuddhe pratinivartaya āyuḥśuddhe samayādhiṣṭhite · maṇi maṇi mahāmaṇi tathatā-bhūtakoṭi-pariśuddhe visphuṭa-buddhi-śuddhe · jaya jaya vijaya vijaya smara smara sarvabuddhādhiṣṭhita-śuddhe · vajri vajragarbhe vajraṃ bhavatu mama śarīraṃ sarvasattvānāṃ ca kāya-pariviśuddhe sarvagati-pariśuddhe · sarvatathāgatāś ca me samāśvāsayantu sarvatathāgata-samāśvāsādhiṣṭhite · budhya budhya vibudhya vibudhya bodhaya bodhaya vibodhaya vibodhaya samanta-pariśuddhe sarvatathāgata-hṛdayādhiṣṭhānādhiṣṭhita mahāmudre svāhā',
+   ipa:'[namo bʱaɡaʋat̪e t̪railokja prat̪iʋiɕiʂʈaːja bud̪d̪ʱaːja bʱaɡaʋat̪e ‖ oːm ʋiɕoːd̪ʱaja ʋiɕoːd̪ʱaja samasama samant̪aːʋabʱaːsa spʱaraɳa ɡat̪iɡahana sʋabʱaːʋa ʋiɕud̪d̪ʱe ‖ abʱiʂiɲtɕat̪u maːm suɡat̪a ʋaraʋatɕana amrit̪aːbʱiʂeːkair mahaːmant̪rapad̪aih ‖ aːhara aːhara aːjuh samd̪ʱaːraɳi ɕoːd̪ʱaja ɕoːd̪ʱaja ɡaɡana ʋiɕud̪d̪ʱe ‖ uʂɳiːʂa ʋidʑaja ʋiɕud̪d̪ʱe sahasraraɕmi samtɕoːd̪it̪e ‖ sarʋat̪at̪ʱaːɡat̪a aʋaloːkani ʂaʈpaːramit̪aː paripuːraɳi ‖ sarʋat̪at̪ʱaːɡat̪a hrid̪aja ad̪ʱiʂʈʱaːna ad̪ʱiʂʈʱit̪a mahaːmud̪re ‖ ʋadʑrakaːja samhat̪ana ʋiɕud̪d̪ʱe ‖ sarʋaːʋaraɳa apaːjad̪urɡat̪i pariʋiɕud̪d̪ʱe ‖ prat̪iniʋart̪aja aːjuh ɕud̪d̪ʱe samaja ad̪ʱiʂʈʱit̪e ‖ maɳi maɳi mahaːmaɳi tat̪ʱat̪aː bʱuːt̪akoʈi pariɕud̪d̪ʱe ‖ ʋispʱuʈa bud̪d̪ʱi ɕud̪d̪ʱe ‖ dʑaja dʑaja ʋidʑaja ʋidʑaja smara smara ‖ sarʋabud̪d̪ʱa ad̪ʱiʂʈʱit̪a ɕud̪d̪ʱe ‖ ʋadʑri ʋadʑraɡarbʱe ʋadʑram bʱaʋat̪u mama ɕariːram sarʋasat̪t̪ʋaːnaːm tɕa kaːja pariʋiɕud̪d̪ʱe sarʋaɡat̪i pariɕud̪d̪ʱe ‖ sarʋat̪at̪ʱaːɡat̪aːɕ tɕa me samaːɕʋaːsajant̪u sarʋat̪at̪ʱaːɡat̪a samaːɕʋaːsa ad̪ʱiʂʈʱit̪e ‖ bud̪ʱja bud̪ʱja ʋibud̪ʱja ʋibud̪ʱja boːd̪ʱaja boːd̪ʱaja ʋiboːd̪ʱaja ʋiboːd̪ʱaja ‖ samant̪a pariɕud̪d̪ʱe sarʋat̪at̪ʱaːɡat̪a hrid̪aja ad̪ʱiʂʈʱaːna ad̪ʱiʂʈʱit̪a mahaːmud̪re sʋaːhaː]',
+   dy:'南谟薄伽跋帝 · 怛隶路枳也钵啰底毗失瑟吒耶 · 勃陀耶薄伽跋帝 · 怛侄他 · 唵 · 毗输驮耶毗输驮耶 · 娑摩娑摩 · 三漫多皤婆娑 · 娑破啰拏 · 伽底伽诃那 · 娑嚩婆嚩毗秫提 · 阿鼻诜遮睹曼 · 苏蘗多嚩啰嚩遮那 · 阿蜜唎多毗瑟羯帝 · 摩诃曼怛啰跛乃 · 阿诃啰阿诃啰 · 阿庾散陀啰尼 · 输驮耶输驮耶 · 伽伽那毗秫提 · 乌瑟尼沙毗惹耶毗秫提 · 娑诃娑啰啰湿弭三注低帝 · 萨嚩怛他蘗多阿嚩路迦尼 · 杀吒播啰弭多波哩布啰尼 · 萨嚩怛他蘗多纥哩那耶 · 地瑟吒曩地瑟耻多 · 摩诃母捺隶 · 嚩曰啰迦耶僧诃多那毗秫提 · 萨嚩嚩啰拏阿波耶讷嚩蘗底波哩毗秫提 · 钵啰底尼嚩多耶阿庾秫提 · 娑摩耶地瑟耻帝 · 摩尼摩尼摩诃摩尼 · 怛他多部多拘胝波哩秫提 · 毗娑普吒勃地秫提 · 惹耶惹耶毗惹耶毗惹耶 · 娑摩啰娑摩啰 · 萨嚩勃陀地瑟耻多秫提 · 嚩曰哩嚩曰啰蘗陛 · 嚩曰蓝婆嚩睹么么舍哩蓝 · 萨嚩萨怛嚩难遮迦耶波哩毗秫提 · 萨嚩蘗底波哩秫提 · 萨嚩怛他蘗多室者三摩湿嚩娑演睹 · 萨嚩怛他蘗多三摩湿嚩娑地瑟耻帝 · 勃地耶勃地耶毗勃地耶毗勃地耶 · 冒驮耶冒驮耶毗冒驮耶毗冒驮耶 · 三漫多波哩秫提 · 萨嚩怛他蘗多纥哩那耶地瑟吒曩地瑟耻多 · 摩诃母捺隶 · 娑嚩贺',
+   gloss:'主脉只有四个动词在反复：<b>viśodhaya</b>（令清净）、<b>adhiṣṭhita</b>（加持）、<b>śuddhe</b>（清净）、<b>svāhā</b>（成就）。"乌瑟尼沙"即 <b>uṣṇīṣa</b> 佛顶，"毗惹耶"即 <b>vijaya</b> 尊胜——咒名就藏在咒心。中段 maṇi maṇi mahāmaṇi、jaya jaya vijaya vijaya、budhya budhya 三处叠字，是天然的换气点。', f:'audio/d_zunsheng.mp3', s:'audio/ipa_d_zunsheng.mp3'},
+];
+
+const NUM = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七'];
+function mantraCards(list){
+  return list.map((m,i)=>`
+  <div class="mantra${m.long?' long':''}" data-audio="${m.f}" data-skt="${m.s}">
+    <div class="no">${NUM[i]}</div>
+    <div class="body">
+      <div class="name">${m.name}<span class="where">${m.where}</span></div>
+      <div class="iast">${m.iast}</div>
+      <div class="ipa">${m.ipa}</div>
+      <div class="duiyin">${m.dy}</div>
+      <div class="gloss">${m.gloss}</div>
+    </div>
+    ${playBtnHTML}
+  </div>`).join('');
+}
+document.getElementById('mantraList').innerHTML = mantraCards(MANTRAS);
+document.getElementById('jaboList').innerHTML = mantraCards(JABO);
+document.getElementById('dharaniList').innerHTML = mantraCards(DA);
+
+/* ---------------- 播放逻辑 ---------------- */
+const audio = new Audio();
+let currentBtn = null, currentBox = null;
+let MODE = 'skt';   /* skt = 梵音 IPA 合成（默认），cni = 唐音汉字拟音 */
+
+function fmt(s){
+  if(!isFinite(s)) return '';
+  const m = Math.floor(s/60), ss = Math.round(s%60);
+  return `（${m}:${String(ss).padStart(2,'0')}）`;
+}
+
+function srcOf(box){
+  return (MODE === 'skt' && box.dataset.skt) ? box.dataset.skt : box.dataset.audio;
+}
+
+function setLabel(btn, text){
+  const labelNode = [...btn.childNodes].find(n=>n.nodeType===3);
+  if(labelNode) labelNode.textContent = text;
+}
+
+function resetCurrent(){
+  if(currentBtn){
+    currentBtn.classList.remove('playing');
+    setLabel(currentBtn, '（播放）');
+  }
+  if(currentBox) currentBox.classList.remove('playing');
+  currentBtn = null; currentBox = null;
+}
+
+function updateDurLabel(btn){
+  const d = btn._dur && (btn._dur[MODE] || btn._dur[MODE==='skt' ? 'cni' : 'skt']);
+  btn.querySelector('.dur').textContent = d ? fmt(d) : '';
+}
+
+document.querySelectorAll('[data-audio]').forEach(box=>{
+  const btn = box.querySelector('.play');
+  btn._dur = {};
+
+  const probe = (src, key)=>{
+    if(!src) return;
+    const p = new Audio();
+    p.preload = 'metadata';
+    p.src = src;
+    p.addEventListener('loadedmetadata', ()=>{
+      btn._dur[key] = p.duration;
+      updateDurLabel(btn);
+    });
+  };
+  probe(box.dataset.audio, 'cni');
+  probe(box.dataset.skt, 'skt');
+
+  btn.addEventListener('click', ()=>{
+    if(currentBtn === btn && !audio.paused){
+      audio.pause();
+      resetCurrent();
+      return;
+    }
+    resetCurrent();
+    audio.src = srcOf(box);
+    audio.play().then(()=>{
+      currentBtn = btn; currentBox = box;
+      btn.classList.add('playing');
+      box.classList.add('playing');
+      setLabel(btn, '（聆听）');
+    }).catch(()=>{});
+  });
+});
+
+audio.addEventListener('ended', resetCurrent);
+
+/* 发音版本切换 */
+document.querySelectorAll('.ms-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    MODE = b.dataset.mode;
+    document.querySelectorAll('.ms-btn').forEach(x=>x.classList.toggle('active', x===b));
+    audio.pause();
+    resetCurrent();
+    document.querySelectorAll('[data-audio] .play').forEach(updateDurLabel);
+  });
+});
+</script>
+</body>
+</html>

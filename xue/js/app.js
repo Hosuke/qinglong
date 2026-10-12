@@ -85,6 +85,7 @@ const audioId = (l) => `l-${String(l.n).padStart(2, '0')}`;
 const letters = () => DATA.groups.flatMap((g) => g.letters.map((l) => ({ ...l, group: g.id })));
 
 const UNITS = [
+  { n: '〇', id: 'yin', href: 'yin/', title: '梵音入門（有聲篇）', desc: '框架詞、元音、輔音、真言與長咒，逐條可聽：梵音 IPA 人聲為主，唐音擬讀為輔。', ready: true },
   { n: '一', id: 'letters', title: '悉曇字母', desc: '五十字：十六摩多、三十四體文。字形、讀音與字門義。', ready: true },
   { n: '二', id: 'words', title: '常見之詞', desc: 'oṃ、namaḥ、svāhā、hūṃ、vajra……真言中反覆出現之詞，義與變格。' },
   { n: '三', id: 'conjuncts', title: '合字與連聲', desc: '輔音相疊如何書寫；詞與詞相遇時之音變。' },
@@ -101,11 +102,11 @@ function home() {
     <h1>從字母到真言</h1>
     <p class="lede">真言本是梵語。此課不以漢字注音，直從梵字入手：先識悉曇五十字與其正音，次學常見之詞，終能逐詞讀懂所誦之真言。</p>
     <ol class="units">${UNITS.map((u) => u.ready ? `
-      <a class="unit" href="#/${u.id}">
+      <a class="unit" href="${u.href || '#/' + u.id}">
         <span class="num">${u.n}</span>
         <div><h3>${u.title}</h3><p>${u.desc}</p>
-          <div class="meter" title="已熟 ${known}/${all.length}"><i style="width:${(known / all.length) * 100}%"></i></div></div>
-        <span class="state">已熟 ${known}/${all.length}</span>
+          ${u.href ? '' : `<div class="meter" title="已熟 ${known}/${all.length}"><i style="width:${(known / all.length) * 100}%"></i></div>`}</div>
+        <span class="state">${u.href ? '有聲' : `已熟 ${known}/${all.length}`}</span>
       </a>` : `
       <li class="unit soon"><span class="num">${u.n}</span><div><h3>${u.title}</h3><p>${u.desc}</p></div><span class="state">籌備中</span></li>`).join('')}
     </ol>`;
