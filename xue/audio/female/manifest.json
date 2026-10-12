@@ -1,0 +1,406 @@
+{
+  "voice": "hi-IN-SwaraNeural",
+  "generated": "2026-10-12T09:28:36.571191+00:00",
+  "items": [
+    {
+      "id": "l-01",
+      "iast": "a",
+      "ipa": "a",
+      "rate": "-30%",
+      "sha256": "040e8fe2b36d240fbac971f86506dda5c57c3962cdb97d66fdcd5493312ef09c",
+      "bytes": 8064
+    },
+    {
+      "id": "l-02",
+      "iast": "ā",
+      "ipa": "aː",
+      "rate": "-30%",
+      "sha256": "23fdc9c9da79cb17f7757c4c9963bce9a8c0917065f0b27a0f0c24dc3ead9f0a",
+      "bytes": 8064
+    },
+    {
+      "id": "l-03",
+      "iast": "i",
+      "ipa": "i",
+      "rate": "-30%",
+      "sha256": "901cfc85ecb38443c2e9f77dd95005d4ddff0fdc5ae43c74a6b6518e75ca9d76",
+      "bytes": 8352
+    },
+    {
+      "id": "l-04",
+      "iast": "ī",
+      "ipa": "iː",
+      "rate": "-30%",
+      "sha256": "c8371b6e0bbbc0b4f82bc7a23485b5d12d9a8b20fea14d7e8878ce7f4947a2f7",
+      "bytes": 8352
+    },
+    {
+      "id": "l-05",
+      "iast": "u",
+      "ipa": "u",
+      "rate": "-30%",
+      "sha256": "5100bae0873c6c650f8096e8e81bd8f0150413d204ca6d2ce22620711de00843",
+      "bytes": 8208
+    },
+    {
+      "id": "l-06",
+      "iast": "ū",
+      "ipa": "uː",
+      "rate": "-30%",
+      "sha256": "f4e6c120b45c5471bedc8728806ed014b0a7764a008d7440c04abbd7aae0276b",
+      "bytes": 8208
+    },
+    {
+      "id": "l-07",
+      "iast": "ṛ",
+      "ipa": "ri",
+      "rate": "-30%",
+      "sha256": "dfb56e2a8d60bfffbc6b536130921b646facbfe10dc38a62b2ab2cf77ecdb204",
+      "bytes": 8640
+    },
+    {
+      "id": "l-08",
+      "iast": "ṝ",
+      "ipa": "riː",
+      "rate": "-30%",
+      "sha256": "9f1e6c440ce00fc0fa8605057cbd212566ad5e7e5806fb9d4235caa692aff01e",
+      "bytes": 8640
+    },
+    {
+      "id": "l-09",
+      "iast": "ḷ",
+      "ipa": "li",
+      "rate": "-30%",
+      "sha256": "adb69a9d9f66e604f393da5c52cacd9e7db6bea56c1cbf3d343b5f79adeecc6b",
+      "bytes": 8640
+    },
+    {
+      "id": "l-10",
+      "iast": "ḹ",
+      "ipa": "liː",
+      "rate": "-30%",
+      "sha256": "4f79beade8d2a54e7758b382373a9aed5e511c56269f06360b7ee5882e821112",
+      "bytes": 8640
+    },
+    {
+      "id": "l-11",
+      "iast": "e",
+      "ipa": "eː",
+      "rate": "-30%",
+      "sha256": "823e786076519d3176decdfecf8a4025c23a3a443e682f98901f9496bb9cd002",
+      "bytes": 8208
+    },
+    {
+      "id": "l-12",
+      "iast": "ai",
+      "ipa": "ai",
+      "rate": "-30%",
+      "sha256": "61c7c8d956e07b6ebd422bf1f2d43938ecf3dbe317d619665967111443d6736c",
+      "bytes": 9216
+    },
+    {
+      "id": "l-13",
+      "iast": "o",
+      "ipa": "oː",
+      "rate": "-30%",
+      "sha256": "199415e3d01be10f99d717bb30cf9e7805017b9fdd5edabc317178d52c34abe2",
+      "bytes": 8352
+    },
+    {
+      "id": "l-14",
+      "iast": "au",
+      "ipa": "au",
+      "rate": "-30%",
+      "sha256": "f9e70cff2d43d9d665c0d83bf1d8f3ccc96172341f94113204c9223e64fe071f",
+      "bytes": 9072
+    },
+    {
+      "id": "l-15",
+      "iast": "aṃ",
+      "ipa": "am",
+      "rate": "-30%",
+      "sha256": "134c0a9b43a1a6509918b44592ba03ce5c043cd2db3b1334aa050afb02dc4482",
+      "bytes": 9792
+    },
+    {
+      "id": "l-16",
+      "iast": "aḥ",
+      "ipa": "ah",
+      "rate": "-30%",
+      "sha256": "2bd36bc817e4cf5bdc22de3cc2fdc36c4a192bef74de354fe69fe0aed54d2bf6",
+      "bytes": 8784
+    },
+    {
+      "id": "l-17",
+      "iast": "ka",
+      "ipa": "ka",
+      "rate": "-30%",
+      "sha256": "4d804f5a3c4e938035273105db0d0842ab1d7434d7f1ecf5d82aea3f8528cfa5",
+      "bytes": 8208
+    },
+    {
+      "id": "l-18",
+      "iast": "kha",
+      "ipa": "kʰa",
+      "rate": "-30%",
+      "sha256": "13eab384e84b4809c1d6a3c0277d75c781b07a5b3030399303267ecec6d76b91",
+      "bytes": 8928
+    },
+    {
+      "id": "l-19",
+      "iast": "ga",
+      "ipa": "ɡa",
+      "rate": "-30%",
+      "sha256": "a4fa74bffa012399014383f92b8bf48729d6e2a5de1e80fe542d9e2e9a33a0be",
+      "bytes": 8640
+    },
+    {
+      "id": "l-20",
+      "iast": "gha",
+      "ipa": "ɡʱa",
+      "rate": "-30%",
+      "sha256": "198185a83bf13a0bb35fdf66387a6bb8724f6a729900a79ca281f0979ea57ab1",
+      "bytes": 8640
+    },
+    {
+      "id": "l-21",
+      "iast": "ṅa",
+      "ipa": "ŋa",
+      "rate": "-30%",
+      "sha256": "9a305564ae5078cded807d9f3782da91282d237a6f6a4eb3b4ad953da146fd9b",
+      "bytes": 8640
+    },
+    {
+      "id": "l-22",
+      "iast": "ca",
+      "ipa": "tɕa",
+      "rate": "-30%",
+      "sha256": "85aae2a0e94b982d7ea1ad0e42d317c6083960226646a4cc129c090fc6a283fd",
+      "bytes": 8640
+    },
+    {
+      "id": "l-23",
+      "iast": "cha",
+      "ipa": "tɕʰa",
+      "rate": "-30%",
+      "sha256": "1fab3dc8257a9694ba9a0748ee149d13450952fa0295075525900e1331aa01d0",
+      "bytes": 8640
+    },
+    {
+      "id": "l-24",
+      "iast": "ja",
+      "ipa": "dʑa",
+      "rate": "-30%",
+      "sha256": "625f8f1259c05b8be19f3c1ecdedc5df37476891f018e72e1b0a1fa3dafce06e",
+      "bytes": 8928
+    },
+    {
+      "id": "l-25",
+      "iast": "jha",
+      "ipa": "dʑʱa",
+      "rate": "-30%",
+      "sha256": "9c13c8e2d12f580132913a821e22263e953f0786b1f37702213d18929e9d93eb",
+      "bytes": 8928
+    },
+    {
+      "id": "l-26",
+      "iast": "ña",
+      "ipa": "ɲa",
+      "rate": "-30%",
+      "sha256": "3ed9c85fd54095f0467d4293fab4c59d3fc441e454dac04ca778498c4703c043",
+      "bytes": 8352
+    },
+    {
+      "id": "l-27",
+      "iast": "ṭa",
+      "ipa": "ʈa",
+      "rate": "-30%",
+      "sha256": "d2759f5e6d794dfc04fa3d874209f8a2659bd9f34e224a514275c6211eb88c27",
+      "bytes": 8352
+    },
+    {
+      "id": "l-28",
+      "iast": "ṭha",
+      "ipa": "ʈʰa",
+      "rate": "-30%",
+      "sha256": "a2dc0248740395be941859c7e608c092e3152910d352be4ae3bc6eb250f9071a",
+      "bytes": 8352
+    },
+    {
+      "id": "l-29",
+      "iast": "ḍa",
+      "ipa": "ɖa",
+      "rate": "-30%",
+      "sha256": "10a06cf6b1e5e2019222cfcbe746e6b69ab7c0b855b2fb05d76632ced6177d3a",
+      "bytes": 8640
+    },
+    {
+      "id": "l-30",
+      "iast": "ḍha",
+      "ipa": "ɖʱa",
+      "rate": "-30%",
+      "sha256": "e8e7ced467eabad14ee33975240df04450d4e17fe4af8f0f8efd254c7cc82624",
+      "bytes": 8640
+    },
+    {
+      "id": "l-31",
+      "iast": "ṇa",
+      "ipa": "ɳa",
+      "rate": "-30%",
+      "sha256": "5b69f01b758327c1a544fe5ec81bb660731bd75963481d9f167a40d0b3aed73d",
+      "bytes": 8640
+    },
+    {
+      "id": "l-32",
+      "iast": "ta",
+      "ipa": "t̪a",
+      "rate": "-30%",
+      "sha256": "e75ab8feabebc1939debf9bc40e3102410d5df20db28f95056d0d44428153fd4",
+      "bytes": 8496
+    },
+    {
+      "id": "l-33",
+      "iast": "tha",
+      "ipa": "t̪ʰa",
+      "rate": "-30%",
+      "sha256": "575ba6248610584e0cc384e69da9999e4a44c173ba01c9512eb2fa74a0b3532f",
+      "bytes": 8784
+    },
+    {
+      "id": "l-34",
+      "iast": "da",
+      "ipa": "d̪a",
+      "rate": "-30%",
+      "sha256": "0add70cb318efe8180bce34a906fb7b5a0fe167bd690b4540cff3730edb32854",
+      "bytes": 8640
+    },
+    {
+      "id": "l-35",
+      "iast": "dha",
+      "ipa": "d̪ʱa",
+      "rate": "-30%",
+      "sha256": "1e9dc0a67c5e39c255fdad50e24f133700278743673821472c173be21c556122",
+      "bytes": 8640
+    },
+    {
+      "id": "l-36",
+      "iast": "na",
+      "ipa": "na",
+      "rate": "-30%",
+      "sha256": "58b036c5f3c393c7a339995d3bb16da69b98b55ee00355c67523bb87a4ac75f5",
+      "bytes": 8640
+    },
+    {
+      "id": "l-37",
+      "iast": "pa",
+      "ipa": "pa",
+      "rate": "-30%",
+      "sha256": "c85fa2ffb9693f94b0426911b129c604ac13aa75542a227b12473ee49694387e",
+      "bytes": 8208
+    },
+    {
+      "id": "l-38",
+      "iast": "pha",
+      "ipa": "pʰa",
+      "rate": "-30%",
+      "sha256": "0a63f8b154a341e9407f24f36324236458ba7a95520bf67ffdb0f571f2c0af4e",
+      "bytes": 8640
+    },
+    {
+      "id": "l-39",
+      "iast": "ba",
+      "ipa": "ba",
+      "rate": "-30%",
+      "sha256": "58ca55bbcf932c5899e2c2aac8915bdfa9dace9df73aefc560e2702d0bc69212",
+      "bytes": 8640
+    },
+    {
+      "id": "l-40",
+      "iast": "bha",
+      "ipa": "bʱa",
+      "rate": "-30%",
+      "sha256": "526d9acddbc0348972338eed0bef0e81120e915d283942fedb12c9adbc0bdc6d",
+      "bytes": 8640
+    },
+    {
+      "id": "l-41",
+      "iast": "ma",
+      "ipa": "ma",
+      "rate": "-30%",
+      "sha256": "12674ada0a9aafaeed235b3ebbacd1dcaffaeeab133d0957d00925c9af0c852b",
+      "bytes": 8640
+    },
+    {
+      "id": "l-42",
+      "iast": "ya",
+      "ipa": "ja",
+      "rate": "-30%",
+      "sha256": "0113214e95440b53727e53d256278fdafb219b5db14dc23494deea74d65ad2e3",
+      "bytes": 8640
+    },
+    {
+      "id": "l-43",
+      "iast": "ra",
+      "ipa": "ra",
+      "rate": "-30%",
+      "sha256": "7a4ae339ea68731d62aa0bdc647a4a2d172af98d82bb82fff34c4a256bfc955a",
+      "bytes": 8784
+    },
+    {
+      "id": "l-44",
+      "iast": "la",
+      "ipa": "la",
+      "rate": "-30%",
+      "sha256": "6e3dae7228ff8986e61d1fac91fdd3858a0b74df03d08d42955a3a8501a12c43",
+      "bytes": 8640
+    },
+    {
+      "id": "l-45",
+      "iast": "va",
+      "ipa": "ʋa",
+      "rate": "-30%",
+      "sha256": "25ef4ae3e72fd2303252c2dbe8607aaa7c5f89e08fb7941b35fa87c2b63d267c",
+      "bytes": 8496
+    },
+    {
+      "id": "l-46",
+      "iast": "śa",
+      "ipa": "ɕa",
+      "rate": "-30%",
+      "sha256": "1faeb8a3e83f39f9834df0ef2543f13d648dd6147c5e6aed9c694867fa39c437",
+      "bytes": 9072
+    },
+    {
+      "id": "l-47",
+      "iast": "ṣa",
+      "ipa": "ʂa",
+      "rate": "-30%",
+      "sha256": "de7a4fcb004a7225344e96f10a5bc7ad055260481aa7d4ee5ef2a662fad44c54",
+      "bytes": 9072
+    },
+    {
+      "id": "l-48",
+      "iast": "sa",
+      "ipa": "sa",
+      "rate": "-30%",
+      "sha256": "f086a92875c98c337ca07b15d2550a3b719d96163e4c58b68665933dda9c6ad5",
+      "bytes": 9216
+    },
+    {
+      "id": "l-49",
+      "iast": "ha",
+      "ipa": "ha",
+      "rate": "-30%",
+      "sha256": "663a2b472ece557d60aa3e1162ab3bfcedb1555cdfc2f48fa23aa261f0eb06ab",
+      "bytes": 8640
+    },
+    {
+      "id": "l-50",
+      "iast": "kṣa",
+      "ipa": "kʂa",
+      "rate": "-30%",
+      "sha256": "9e498de29c676849b302f5e5e79975643512476713b18409e007f0060b4702e3",
+      "bytes": 8496
+    }
+  ]
+}

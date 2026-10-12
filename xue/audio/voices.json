@@ -1,0 +1,14 @@
+{
+  "voices": [
+    {
+      "id": "female",
+      "label": "女聲",
+      "dir": "female/"
+    },
+    {
+      "id": "male",
+      "label": "男聲",
+      "dir": "male/"
+    }
+  ]
+}

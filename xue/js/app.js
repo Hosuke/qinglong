@@ -1,7 +1,23 @@
 // 學梵：課表、字母、練習三視圖；以 hash 為路由，零依賴。
 import { iastToSiddham, iastToDevanagari } from './vendor/siddham-core.js';
 
+
+// 梵字字體：存於本機，預設毛筆
+const SDFONT_KEY = 'qinglong:sdfont';
+function initSdFont(select) {
+  let v = 'brush';
+  try { v = localStorage.getItem(SDFONT_KEY) || v; } catch {}
+  document.documentElement.dataset.sdfont = v;
+  if (!select) return;
+  select.value = v;
+  select.addEventListener('change', () => {
+    document.documentElement.dataset.sdfont = select.value;
+    try { localStorage.setItem(SDFONT_KEY, select.value); } catch {}
+  });
+}
+
 const view = document.getElementById('view');
+initSdFont(document.getElementById('sdfont'));
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const sd = (ia) => iastToSiddham(ia) || '';
 const dv = (ia) => iastToDevanagari(ia) || '';
@@ -29,6 +45,43 @@ const store = {
 const boxes = () => store.get('boxes', {});
 
 let DATA;
+const player = new Audio();
+// 聲音：讀 audio/voices.json；各聲之 manifest 定其可播之條。partial 之聲（原錄）缺者退用首聲
+const VOICE_KEY = 'qinglong:voice';
+const VOICES = { list: [], have: {}, cur: null };
+async function loadVoices(base) {
+  try {
+    const v = await (await fetch(base + 'voices.json')).json();
+    VOICES.list = Array.isArray(v?.voices) ? v.voices.filter((x) => x && typeof x.id === 'string' && typeof x.dir === 'string' && !/[^\w/-]/.test(x.dir)) : [];
+  } catch { VOICES.list = []; }
+  for (const x of VOICES.list) {
+    try {
+      const m = await (await fetch(base + x.dir + 'manifest.json')).json();
+      const list = Array.isArray(m?.items) ? m.items : Array.isArray(m) ? m : [];
+      VOICES.have[x.id] = new Set(list.filter((i) => i && typeof i.id === 'string').map((i) => i.id));
+    } catch { VOICES.have[x.id] = new Set(); }
+  }
+  let saved = null;
+  try { saved = localStorage.getItem(VOICE_KEY); } catch {}
+  VOICES.cur = VOICES.list.find((x) => x.id === saved)?.id || VOICES.list[0]?.id || null;
+}
+// 某條在當前聲之音檔路徑；無則退用首個非 partial 之聲；皆無則 null
+function audioSrc(base, id) {
+  const order = [VOICES.cur, ...VOICES.list.filter((x) => !x.partial).map((x) => x.id)];
+  for (const v of order) {
+    const x = VOICES.list.find((y) => y.id === v);
+    if (x && VOICES.have[v]?.has(id)) return base + x.dir + id + '.mp3';
+  }
+  return null;
+}
+function voiceSelect(el, onChange) {
+  if (!el || !VOICES.list.length) { if (el) el.closest('label').hidden = true; return; }
+  el.innerHTML = VOICES.list.map((x) => `<option value="${x.id.replace(/"/g, '')}">${String(x.label).replace(/[<&]/g, '')}${x.partial ? '（部分）' : ''}</option>`).join('');
+  el.value = VOICES.cur;
+  el.addEventListener('change', () => { VOICES.cur = el.value; try { localStorage.setItem(VOICE_KEY, el.value); } catch {} onChange?.(); });
+}
+
+const audioId = (l) => `l-${String(l.n).padStart(2, '0')}`;
 const letters = () => DATA.groups.flatMap((g) => g.letters.map((l) => ({ ...l, group: g.id })));
 
 const UNITS = [
@@ -80,6 +133,7 @@ function lettersView(selected) {
     const ia = el.dataset.ia;
     location.hash = ia === selected ? '#/letters' : `#/letters/${encodeURIComponent(ia)}`;
   }));
+  view.querySelector('.listen')?.addEventListener('click', (e) => { player.src = e.currentTarget.dataset.src; player.play().catch(() => {}); });
   if (selected) view.querySelector('.detail')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
@@ -87,7 +141,7 @@ function detail(l) {
   const src = DATA.source;
   return `<div class="detail">
     <div class="big"><span class="sd" lang="sa-Sidd">${sd(l.iast)}</span><span class="dv" lang="sa-Deva">${dv(l.iast)}</span></div>
-    <div><span class="ia">${esc(l.iast)}</span><span class="ipa">/${esc(l.ipa)}/</span></div>
+    <div><span class="ia">${esc(l.iast)}</span><span class="ipa">/${esc(l.ipa)}/</span>${audioSrc('audio/', audioId(l)) ? `<button class="listen" data-src="${esc(audioSrc('audio/', audioId(l)))}" aria-label="聆聽 ${esc(l.iast)}">▶ 聆</button>` : ''}</div>
     <p class="how">${esc(l.how)}</p>
     <p class="gate">字門義：<b>${esc(l.gate)}</b></p>
     <p class="src">出《${esc(src.title)}》${esc(src.translator)}，此字譯作「${esc(l.zh)}」${l.zh_note ? esc(l.zh_note) : ''}・<a href="${esc(cbeta(src.doc, l.lb))}" target="_blank" rel="noopener">${esc(src.doc)} ${esc(l.lb)}</a></p>
@@ -164,5 +218,6 @@ function route() {
   else home();
 }
 
-fetch('content/letters.json').then((r) => r.json()).then((d) => { DATA = d; addEventListener('hashchange', route); route(); })
+loadVoices('audio/').then(() => voiceSelect(document.getElementById('voice'), () => route()))
+  .then(() => fetch('content/letters.json')).then((r) => r.json()).then((d) => { DATA = d; addEventListener('hashchange', route); route(); })
   .catch((e) => { view.innerHTML = `<p>載入未成：${esc(e.message)}</p>`; });

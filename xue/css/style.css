@@ -1,9 +1,10 @@
+@font-face{font-family:"Qinglong Siddham";src:url("../fonts/QinglongSiddham-Regular.woff2") format("woff2");font-display:swap}
 :root{
   --paper:#f5f0e6; --card:#fbf8f1; --sunk:#ece5d6; --ink:#2b2620; --ink-2:#6b6157; --ink-3:#72675a; --rule:#ddd3c1;
   --zhu:#a8392b; --indigo:#2f4a6b; --gold:#8a6a2f; --ok:#2f6b4a; --bad:#a8392b;
   --f-zh:"LXGW WenKai TC","Songti TC","Noto Serif TC",serif;
   --f-la:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
-  --f-sd:"Noto Sans Siddham",serif; --f-dv:"Noto Serif Devanagari",serif;
+  --f-sd:"Qinglong Siddham","Noto Sans Siddham",serif; --f-dv:"Noto Serif Devanagari",serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -62,6 +63,7 @@ a.unit:hover{border-color:var(--zhu)}
 .detail .ia{font:italic 600 1.8rem/1.2 var(--f-la);color:var(--indigo)}
 .detail .ipa{font:1.05rem var(--f-la);color:var(--ink-2);margin-left:.6rem}
 .detail .how{margin:0}
+.detail .listen{margin-left:.8rem;font:inherit;font-size:.82rem;color:var(--indigo);background:none;border:1px solid var(--indigo);border-radius:3px;padding:0 .6rem;cursor:pointer;vertical-align:middle}
 .detail .gate{margin:0;color:var(--ink-2)}
 .detail .gate b{color:var(--ink);font-weight:400}
 .detail .src{font-size:.78rem;color:var(--ink-3);margin:0}
@@ -85,3 +87,9 @@ a.unit:hover{border-color:var(--zhu)}
 .choices button.bad{border-color:var(--bad);color:var(--bad)}
 .feedback{min-height:3rem;margin-top:1rem;color:var(--ink-2);font-size:.92rem}
 .tally{color:var(--ink-3);font-size:.85rem;margin-top:.4rem}
+
+/* 梵字字體切換：毛筆（Qinglong Siddham）／規整（Noto Sans Siddham）*/
+:root[data-sdfont="brush"]{--f-sd:"Qinglong Siddham","Noto Sans Siddham",serif}
+:root[data-sdfont="plain"]{--f-sd:"Noto Sans Siddham","Qinglong Siddham",serif}
+.sdfont{display:inline-flex;align-items:center;gap:.3rem;font-size:.88rem;color:var(--ink-2)}
+.sdfont select{font:inherit;color:var(--ink);background:var(--card,transparent);border:1px solid var(--rule);border-radius:3px;padding:.05rem .3rem}
