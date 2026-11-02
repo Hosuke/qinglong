@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>功課 · 青龍</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+Siddham&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/">功課<span>青龍</span></a>
+  <nav class="navlinks" id="nav" hidden>
+    <a href="#/">次第</a><a href="#/log">記錄</a><a href="#/notes">要點</a>
+  </nav>
+</header>
+
+<main id="view">
+  <section class="gate" id="gate">
+    <p class="eyebrow">修法弟子</p>
+    <h1>入門一問</h1>
+    <form id="gate-form" autocomplete="off">
+      <label for="answer">青龍流祖庭是？</label>
+      <input id="answer" name="answer" inputmode="text" autocapitalize="off" spellcheck="false" required>
+      <label class="remember"><input type="checkbox" id="remember" checked> 此設備記住</label>
+      <button type="submit">入</button>
+      <p class="msg" id="gate-msg" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="colophon">修法資料，請勿外傳。內容於本機解密；功課記錄只存本機。修習次第依阿闍梨所授為準。</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
